@@ -34,7 +34,7 @@ int count_unknown_squares(const int board[MAX_SIZE][MAX_SIZE], int size) {
         }
         
     }
-    return numUnknown;
+    return numUnknown; //TESTED
 }
 
 
@@ -48,27 +48,126 @@ bool row_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
                                 int size,
                                 int row,
                                 int color) {
-    // write your code here
+    bool ThreeOrNot = true;
+    int redCounter = 0;
+    int blueCounter = 0;
 
-    // replace this return statement
-    return false;
+    if (size = 2) {
+        return true;
+    }
+
+    //red
+    if (color == RED) {
+        int i = row;
+        //iterate through columns in row
+        for (int j = 0; j < size - 1; i++) {
+            if((board[i][j] == 1) && (board[i][j+1] == 1) && (board[i][j+2] == 1)) {
+                ThreeOrNot = false;
+            }
+            else {
+                ThreeOrNot = true;
+            }
+        }
+    }
+
+    //blue
+    if (color == BLUE) {
+        int i = row;
+        //iterate through columns in row
+        for (int j = 0; j < size - 1; i++) {
+            if ((board[i][j] == 2) && (board[i][j + 1] == 2) && (board[i][j + 2] == 2)) {
+                ThreeOrNot = false;
+            }
+            else {
+                ThreeOrNot = true;
+            }
+        }
+    }
+    return ThreeOrNot;
+    //NOT TESTED
 }
 
 bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
                                 int size,
                                 int col,
                                 int color) {
-    // write your code here
+    bool ThreeOrNot = true;
+    int redCounter = 0;
+    int blueCounter = 0;
 
-    // replace this return statement
-    return false;
+    if (size = 2) {
+        return true;
+    }
+
+    //red
+    if (color == RED) {
+        int i = col;
+        //iterate through rows in col
+        for (int j = 0; j < size - 1; i++) {
+            if ((board[j][i] == 1) && (board[j + 1][i] == 1) && (board[j +2][i] == 1)) {
+                ThreeOrNot = false;
+            }
+            else {
+                ThreeOrNot = true;
+            }
+        }
+    }
+
+    //blue
+    if (color == BLUE) {
+        int i = col;
+        //iterate through columns in row
+        for (int j = 0; j < size - 1; i++) {
+            if ((board[j][i] == 2) && (board[j + 1][i] == 2) && (board[j + 2][i] == 2)) {
+                ThreeOrNot = false;
+            }
+            else {
+                ThreeOrNot = true;
+            }
+        }
+    }
+    return ThreeOrNot;
+    //NOT TESTED
 }
 
 bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
-    // write your code here
+    //if color is red row
+    bool ThreeInRow;
+    bool ThreeInCol;
 
-    // replace this return statement
-    return false;
+    for (int row = 0; row < size; row++) {
+        if ((row_has_no_threes_of_color(board, size, row, RED))) {
+            ThreeInRow = true;
+        }
+        else {
+            ThreeInRow = false;
+        }
+    }
+    //if color is blue row
+    for (int row = 0; row < size; row++) {
+        if ((row_has_no_threes_of_color(board, size, row, BLUE))) {
+            ThreeInRow = true;
+        }
+        else {
+            ThreeInRow = false;
+        }
+    }
+    //if color is blue col
+    for (int col = 0; col < size; col++) {
+        if ((col_has_no_threes_of_color(board, size, col, RED))) {
+            ThreeInCol = true;
+        }
+        else {
+            ThreeInCol = false;
+        }
+    }
+    if (ThreeInCol = true && ThreeInRow == true) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    //NOT TESTED
 }
 
 bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
