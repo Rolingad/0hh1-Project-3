@@ -23,10 +23,18 @@
  */
 
 int count_unknown_squares(const int board[MAX_SIZE][MAX_SIZE], int size) {
-    // write your code here
+    int numUnknown = 0;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++)
+        {
+            if (board[i][j] == 0) {
+                numUnknown += 1;
+        }
 
-    // replace this return statement
-    return 0;
+        }
+        
+    }
+    return numUnknown;
 }
 
 
