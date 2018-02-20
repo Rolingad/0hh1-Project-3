@@ -209,6 +209,12 @@ bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
     int col = 0;
 
     for (col = 0; col < size; col++) {
+        if (board[row1][col] == 0 || board[row2][col] == 0) {
+            return true;
+        }
+    }
+
+    for (col = 0; col < size; col++) {
         if (board[row1][col] == board[row2][col]) {
             rowCounter += 1;
         }
@@ -224,16 +230,40 @@ bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
 
 
     return isRowDiff;
+    //TESTED
 }
 
 bool cols_are_different(const int board[MAX_SIZE][MAX_SIZE],
                         int size,
                         int col1,
                         int col2) {
-    // write your code here
+    bool isColDiff = true;
+    int colCounter = 0;
+    int row = 0;
 
-    // replace this return statement
-    return false;
+    for (row = 0; row < size; row++) {
+        if (board[row][col1] == 0 || board[row][col2] == 0) {
+            return true;
+        }
+    }
+
+    for (row = 0; row < size; row++) {
+        if (board[row][col1] == board[row][col2]) {
+            colCounter += 1;
+        }
+    }
+
+    if (colCounter == size) {
+        isColDiff = false;
+    }
+    else {
+        isColDiff = true;
+    }
+
+
+
+    return isColDiff;
+    //TESTED
 }
 
 bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
