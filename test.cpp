@@ -6,7 +6,7 @@
 * Winter 2018
 *
 * <#Nathan Fialkoff and Mary Reiber#>
-* <#npfialk#>
+* <#npfialk#> <#reiberm#>
 *
 * <#A description of the project here#>
 */
