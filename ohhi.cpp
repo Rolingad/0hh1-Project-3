@@ -197,17 +197,29 @@ bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
     else {
         return false;
     }
-    //NOT TESTED
+    //TESTED
 }
 
 bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
                         int size,
                         int row1,
                         int row2) {
-    // write your code here
+    bool isRowDiff = true;
 
-    // replace this return statement
-    return false;
+    for (row1 = 0; row1 < size - 1; row1++) {
+        for (row2 = 1; row2 < size - 1; row2++) {
+            if (isRowDiff == true) {
+                if (board[row1] == board[row2]) {
+                    isRowDiff = false;
+                }
+                else {
+                    isRowDiff = true;
+                }
+            }
+        }
+    }
+
+    return isRowDiff;
 }
 
 bool cols_are_different(const int board[MAX_SIZE][MAX_SIZE],
