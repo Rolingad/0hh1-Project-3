@@ -187,11 +187,11 @@ void test_board_has_no_threes() {
         "O-OOXXO-",
         "XOXOXO--",
         "--O-OXOO",
-        "----XOXO" ,
+        "----XOXO",
         "--O-XXOX",
-        "--------"
+        "--------",
         "OXOXOXOX"};
-    read_board_from_string(board, test_board_4, 8);
+    read_board_from_string(board, test_board_5, 8);
     cout << "true, " << board_has_no_threes(board, 8);
 
 }

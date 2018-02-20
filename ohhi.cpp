@@ -191,7 +191,7 @@ bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
             }
         }
     }
-    if (ThreeInCol = true && ThreeInRow == true) {
+    if (ThreeInCol == true && ThreeInRow == true) {
         return true;
     }
     else {
