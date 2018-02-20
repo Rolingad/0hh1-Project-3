@@ -373,7 +373,7 @@ void test_solve_three_in_a_col() {
         "--O-" };
     int size_1 = 4;
     read_board_from_string(board, test_board_1, size_1);
-    solve_three_in_a_column(board, 4, 1, true);
+    solve_three_in_a_column(board, 4, 0, true);
     cout << endl;
 
     string test_board_2[] = {
@@ -387,7 +387,7 @@ void test_solve_three_in_a_col() {
     solve_three_in_a_column(board, 4, 3, true);
     solve_three_in_a_column(board, 4, 0, true);
 
-    //NOT TESTED
+    //TESTED
 
 
 }
