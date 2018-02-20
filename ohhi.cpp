@@ -209,11 +209,13 @@ bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
     for (row1 = 0; row1 < size - 1; row1++) {
         for (row2 = 1; row2 < size - 1; row2++) {
             if (isRowDiff == true) {
-                if (board[row1] == board[row2]) {
-                    isRowDiff = false;
-                }
-                else {
-                    isRowDiff = true;
+                for (int col = 0; col < size - 1; col++) {
+                    if ((board[row1][col]) == (board[row2][col])) {
+                        isRowDiff = false;
+                    }
+                    else {
+                        isRowDiff = true;
+                    }
                 }
             }
         }
