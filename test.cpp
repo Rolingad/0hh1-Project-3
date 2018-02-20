@@ -22,6 +22,7 @@ void test_board_has_no_threes();
 void test_rows_are_different();
 void test_cols_are_different();
 void test_board_has_no_duplicates();
+void test_solve_three_in_a_row();
 
 // declare more test functions here
 
@@ -46,6 +47,9 @@ int main() {
     cout << endl;
 
     test_board_has_no_duplicates();
+    cout << endl;
+
+    test_solve_three_in_a_row();
     cout << endl;
 
 
@@ -322,5 +326,35 @@ void test_board_has_no_duplicates() {
 
     read_board_from_string(board, test_board_3, 4);
     cout << "false, " << board_has_no_duplicates(board, 4) << endl;
+}
+
+void test_solve_three_in_a_row() {
+
+    int board[MAX_SIZE][MAX_SIZE];
+
+    // test case 1
+    string test_board_1[] = { 
+        "XO-O",
+        "--OO",
+        "---X",
+        "--O-" };
+    int size_1 = 4;
+    read_board_from_string(board, test_board_1, size_1);
+    solve_three_in_a_row(board, 4, 1, true);
+
+    string test_board_2[] = {
+        "OX-X",
+        "XX--",
+        "OO--",
+        "-OO-" };
+    read_board_from_string(board, test_board_2, size_1);
+    solve_three_in_a_row(board, 4, 1, true);
+    solve_three_in_a_row(board, 4, 2, true);
+    solve_three_in_a_row(board, 4, 3, true);
+    solve_three_in_a_row(board, 4, 0, true);
+
+
+    
+
 }
 

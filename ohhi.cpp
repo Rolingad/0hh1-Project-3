@@ -317,12 +317,66 @@ bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
  */
 
 void solve_three_in_a_row(int board[MAX_SIZE][MAX_SIZE],
-                          int size,
-                          int row,
-                          bool announce) {
-    // write your code here
+    int size,
+    int row,
+    bool announce) {
+    int col = 0;
 
-    return;
+    if (size == 2) {
+        return;
+    }
+    //two in row
+    for (col = 0; col < size /* - 2? */; col++) {
+        if ((board[row][col] == RED) && board[row][col + 1] == RED) {
+            if (col == 0) {
+                mark_square_as(board, size, row, col + 2, BLUE, announce);
+
+            }
+            else if (col == size - 1) {
+                mark_square_as(board, size, row, col - 2, BLUE, announce);
+            }
+
+            else if (col == size - 2) {
+                mark_square_as(board, size, row, col - 1, BLUE, announce);
+            }
+            else {
+                mark_square_as(board, size, row, col + 2, BLUE, announce);
+                mark_square_as(board, size, row, col - 1, BLUE, announce);
+            }
+
+        }
+
+        else if ((board[row][col] == BLUE) && board[row][col + 1] == BLUE) {
+            if (col == 0) {
+                mark_square_as(board, size, row, col + 2, RED, announce);
+
+            }
+            else if (col == size - 1) {
+                mark_square_as(board, size, row, col - 2, RED, announce);
+            }
+            else if (col == size - 2) {
+                mark_square_as(board, size, row, col - 1, RED, announce);
+            }
+            else {
+                mark_square_as(board, size, row, col + 2, RED, announce);
+                mark_square_as(board, size, row, col - 1, RED, announce);
+            }
+
+
+        }
+        else if ((board[row][col] == BLUE) && board[row][col + 2] == BLUE) {
+            mark_square_as(board, size, row, col + 1, RED, announce);
+
+        }
+
+        else if ((board[row][col] == RED) && board[row][col + 2] == RED) {
+            mark_square_as(board, size, row, col + 1, BLUE, announce);
+
+        }
+
+
+
+    }
 }
 
 void solve_three_in_a_column(int board[MAX_SIZE][MAX_SIZE],
