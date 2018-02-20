@@ -20,6 +20,8 @@ void test_row_has_no_threes_of_color();
 void test_col_has_no_threes_of_color();
 void test_board_has_no_threes();
 void test_rows_are_different();
+void test_cols_are_different();
+void test_board_has_no_duplicates();
 
 // declare more test functions here
 
@@ -234,3 +236,70 @@ void test_rows_are_different() {
     cout << "true, " << rows_are_different(board, 4, 1, 2) << endl;
     
 }
+
+void test_cols_are_different () {
+    int board[MAX_SIZE][MAX_SIZE];
+    
+    //test case 3
+    string test_board_1[] = {"O-OO",
+                             "O--O",
+                             "O---",
+                             "O---"};
+    
+    cout << "return false" << endl;
+    read_board_from_string(board, test_board_1, 4);
+    cout << cols_are_different(board, 4, 0, 1) << endl;
+    
+    string test_board_2[] = {"--XO",
+                             "--XO",
+                             "--XO",
+                             "--XO"};
+    
+    cout << "return false" << endl;
+    read_board_from_string(board, test_board_2, 4);
+    cout << cols_are_different(board, 4, 2, 3) << endl;
+    
+    string test_board_3[] = {"--XO",
+                             "--XO",
+                             "--XO",
+                             "--XO"};
+    
+    cout << "return true" << endl;
+    read_board_from_string(board, test_board_3, 4);
+    cout << cols_are_different(board, 4, 2, 3) << endl;
+    
+    string test_board_4[] = {"XO--",
+                             "X---",
+                             "XOO-",
+                             "-XOO"};
+    
+    cout << "return true" << endl;
+    read_board_from_string(board, test_board_4, 4);
+    cout << cols_are_different(board, 4, 0, 1) << endl;
+    
+}
+
+void test_board_has_no_duplicates() {
+    int board[MAX_SIZE][MAX_SIZE];
+    
+    // test case
+    
+    string test_board_1[] = {"XOXO",
+                             "XOXO",
+                             "--X-",
+                             "----"};
+    
+    read_board_from_string(board, test_board_1, 4);
+    cout << board_has_no_duplicates(board, 4) << endl;
+    
+    string test_board_2[] = {"XOX-",
+                             "XOXO",
+                             "--X-",
+                             "O---"};
+    
+    read_board_from_string(board, test_board_2, 4);
+    cout << board_has_no_duplicates(board, 4) << endl;
+}
+
+    
+    
