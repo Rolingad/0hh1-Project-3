@@ -457,7 +457,38 @@ void solve_balance_row(int board[MAX_SIZE][MAX_SIZE],
                        int size,
                        int row,
                        bool announce) {
-    // write your code here
+    int col = 0;
+    int redHalfCounter = 0;
+    int blueHalfCounter = 0;
+    
+    //if half row is RED
+    for (col = 0; col < size; col++) {
+        if (board[row][col] == RED) {
+            redHalfCounter += 1;
+        }
+    }
+    if (redHalfCounter == (size / 2)) {
+        for (col = 0; col < size; col++) {
+            if (board[row][col] != RED) {
+                mark_square_as(board, size, row, col, BLUE, announce);
+            }
+        }
+    }
+
+    //if half row is BLUE
+    for (col = 0; col < size; col++) {
+        if (board[row][col] == BLUE) {
+            blueHalfCounter += 1;
+        }
+    }
+    if (blueHalfCounter == (size / 2)) {
+        for (col = 0; col < size; col++) {
+            if (board[row][col] != BLUE) {
+                mark_square_as(board, size, row, col, RED, announce);
+            }
+        }
+    }
+    
 
     return;
 }
