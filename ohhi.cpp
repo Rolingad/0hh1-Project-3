@@ -267,10 +267,46 @@ bool cols_are_different(const int board[MAX_SIZE][MAX_SIZE],
 }
 
 bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
-    // write your code here
+    bool NoColDups = true;
+    bool NoRowDups = true;
 
-    // replace this return statement
-    return false;
+
+    //rows
+    for (int row1 = 0; row1 < size; row1++) {
+        for (int row2 = row1 + 1; row2 < size; row2++) {
+            if (NoRowDups == true) {
+                if (rows_are_different(board, size, row1, row2) == true) {
+                    NoRowDups = true;
+                }
+                else {
+                    NoRowDups = false;
+                }
+            }
+        }
+    }
+    
+    //cols
+    for (int col1 = 0; col1 < size; col1++) {
+        for (int col2 = 0; col2 < size; col2++) {
+            if (NoColDups == true) {
+                if (cols_are_different(board, size, col1, col2) == true) {
+                    NoColDups = true;
+                }
+                else {
+                    NoColDups = false;
+                }
+            }
+        }
+    }
+
+    if (NoColDups == true && NoRowDups == true) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    //TESTED (mostly)
+
 }
 
 

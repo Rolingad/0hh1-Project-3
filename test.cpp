@@ -45,6 +45,9 @@ int main() {
     test_cols_are_different();
     cout << endl;
 
+    test_board_has_no_duplicates();
+    cout << endl;
+
 
 
     // add your calls to test functions here
@@ -293,19 +296,31 @@ void test_board_has_no_duplicates() {
 
     // test case
 
-    string test_board_1[] = { "XOXO",
+    string test_board_1[] = { 
+        "XOXO",
         "XOXO",
         "--X-",
         "----" };
 
     read_board_from_string(board, test_board_1, 4);
-    cout << board_has_no_duplicates(board, 4) << endl;
+    cout << "false, " << board_has_no_duplicates(board, 4) << endl;
 
-    string test_board_2[] = { "XOX-",
+    string test_board_2[] = { 
+        "XOX-",
         "XOXO",
         "--X-",
         "O---" };
 
     read_board_from_string(board, test_board_2, 4);
-    cout << board_has_no_duplicates(board, 4) << endl;
+    cout << "true, " << board_has_no_duplicates(board, 4) << endl;
+
+    string test_board_3[] = { 
+        "X-X-",
+        "X-XO",
+        "O-O-",
+        "O-O-" };
+
+    read_board_from_string(board, test_board_3, 4);
+    cout << "false, " << board_has_no_duplicates(board, 4) << endl;
 }
+
