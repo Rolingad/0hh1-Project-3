@@ -93,7 +93,7 @@ bool row_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
        
     }
     return ThreeOrNot;
-    //TESTED THANK GOD OMG THAT TOOK SO LONG
+    //TESTED THANK GOD OMG THAT TOOK SO LONG FUCKING SHIT
 }
 
 bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
@@ -113,11 +113,13 @@ bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
         int i = col;
         //iterate through rows in col
         for (int j = 0; j < size - 2; j++) {
-            if ((board[j][i] == 1) && (board[j + 1][i] == 1) && (board[j +2][i] == 1)) {
-                ThreeOrNot = false;
-            }
-            else {
-                ThreeOrNot = true;
+            if (ThreeOrNot == true) {
+                if ((board[j][i] == 1) && (board[j + 1][i] == 1) && (board[j + 2][i] == 1)) {
+                    ThreeOrNot = false;
+                }
+                else {
+                    ThreeOrNot = true;
+                }
             }
         }
     }
@@ -127,47 +129,66 @@ bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
         int i = col;
         //iterate through columns in row
         for (int j = 0; j < size - 2; j++) {
-            if ((board[j][i] == 2) && (board[j + 1][i] == 2) && (board[j + 2][i] == 2)) {
-                ThreeOrNot = false;
-            }
-            else {
-                ThreeOrNot = true;
+            if (ThreeOrNot == true) {
+                if ((board[j][i] == 2) && (board[j + 1][i] == 2) && (board[j + 2][i] == 2)) {
+                    ThreeOrNot = false;
+                }
+                else {
+                    ThreeOrNot = true;
+                }
             }
         }
     }
     return ThreeOrNot;
-    //NOT TESTED
+    //TESTED
 }
 
 bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
     //if color is red row
-    bool ThreeInRow;
-    bool ThreeInCol;
+    bool ThreeInRow = true;
+    bool ThreeInCol = true;
 
     for (int row = 0; row < size; row++) {
-        if ((row_has_no_threes_of_color(board, size, row, RED))) {
-            ThreeInRow = true;
-        }
-        else {
-            ThreeInRow = false;
+        if (ThreeInRow == true) {
+            if ((row_has_no_threes_of_color(board, size, row, RED))) {
+                ThreeInRow = true;
+            }
+            else {
+                ThreeInRow = false;
+            }
         }
     }
     //if color is blue row
     for (int row = 0; row < size; row++) {
-        if ((row_has_no_threes_of_color(board, size, row, BLUE))) {
-            ThreeInRow = true;
-        }
-        else {
-            ThreeInRow = false;
+        if (ThreeInRow == true) {
+            if ((row_has_no_threes_of_color(board, size, row, BLUE))) {
+                ThreeInRow = true;
+            }
+            else {
+                ThreeInRow = false;
+            }
         }
     }
-    //if color is blue col
+    //if color is RED col
     for (int col = 0; col < size; col++) {
-        if ((col_has_no_threes_of_color(board, size, col, RED))) {
-            ThreeInCol = true;
+            if (ThreeInCol == true) {
+                if ((col_has_no_threes_of_color(board, size, col, RED))) {
+                    ThreeInCol = true;
+                }
+                else {
+                    ThreeInCol = false;
+                }
+            }
         }
-        else {
-            ThreeInCol = false;
+    //if color is BLUE col
+    for (int col = 0; col < size; col++) {
+        if (ThreeInCol == true) {
+            if ((col_has_no_threes_of_color(board, size, col, BLUE))) {
+                ThreeInCol = true;
+            }
+            else {
+                ThreeInCol = false;
+            }
         }
     }
     if (ThreeInCol = true && ThreeInRow == true) {
