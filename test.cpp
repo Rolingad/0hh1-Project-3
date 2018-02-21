@@ -41,7 +41,7 @@ int main() {
 
     test_col_has_no_threes_of_color();
     cout << endl;
-
+    
     test_board_has_no_threes();
     cout << endl;
     cout << endl;
@@ -70,9 +70,9 @@ int main() {
     test_board_is_solved();
     cout << endl;
 
-   // test_check_valid_input();
+   test_check_valid_input();
     cout << endl;
-
+    
 
 
 
@@ -101,7 +101,8 @@ void test_row_has_no_threes_of_color() {
     int board[MAX_SIZE][MAX_SIZE];
 
     //test case 1
-    string test_board_1[] = { "XO-O",
+    string test_board_1[] = { 
+        "XO-O",
         "--OO",
         "---X",
         "--O-" };
@@ -133,7 +134,19 @@ void test_row_has_no_threes_of_color() {
     cout << "false, " << row_has_no_threes_of_color(board, 6, 2, BLUE) << endl;
     cout << "false, " << row_has_no_threes_of_color(board, 6, 2, RED) << endl;
 
+    string test_board_5[] = {
+        "XOX-O-",
+        "X-OOXX",
+        "XXXOOO",
+        "--O-XX",
+        "------" ,
+        "--O-XX"
 
+    };
+    read_board_from_string(board, test_board_5, 6);
+    cout << "false " << row_has_no_threes_of_color(board, 6, 4, UNKNOWN) 
+        << endl;
+    cout << "true " << row_has_no_threes_of_color(board, 6, 4, BLUE);
 
 
 }
@@ -177,6 +190,23 @@ void test_col_has_no_threes_of_color() {
     read_board_from_string(board, test_board_4, 6);
     cout << "false, " << col_has_no_threes_of_color(board, 6, 0, RED) << endl;
     cout << "false, " << col_has_no_threes_of_color(board, 6, 2, BLUE) << endl;
+
+    string test_board_5[] = {
+        "-OX-O-",
+        "--OOXX",
+        "-XXOOO",
+        "--O-XX",
+        "------" ,
+        "--O-XX"
+
+    };
+    read_board_from_string(board, test_board_5, 6);
+    cout << "false " << col_has_no_threes_of_color(board, 6, 0, UNKNOWN)
+        << endl;
+    cout << "true " << col_has_no_threes_of_color(board, 6, 0, BLUE);
+
+
+
 
 
 

@@ -93,12 +93,13 @@ bool row_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
        
     }
 
+    //Unknown
     if (color == UNKNOWN) {
         int i = row;
         //iterate through columns in row
         for (int j = 0; j < size - 2; j++) {
             if (ThreeOrNot == true) {
-                if ((board[i][j] == 1) && (board[i][j + 1] == 1) && (board[i][j + 2] == 1)) {
+                if ((board[i][j] == 0) && (board[i][j + 1] == 0) && (board[i][j + 2] == 0)) {
                     ThreeOrNot = false;
                 }
                 else {
@@ -161,7 +162,7 @@ bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
         //iterate through columns in row
         for (int j = 0; j < size - 2; j++) {
             if (ThreeOrNot == true) {
-                if ((board[j][i] == 2) && (board[j + 1][i] == 2) && (board[j + 2][i] == 2)) {
+                if ((board[j][i] == 0) && (board[j + 1][i] == 0) && (board[j + 2][i] == 0)) {
                     ThreeOrNot = false;
                 }
                 else {
@@ -628,8 +629,9 @@ bool check_valid_move(const int original_board[MAX_SIZE][MAX_SIZE],
         cout << "Sorry, original squares cannot be changed.";
         return false;
     }
-    else if (board_is_valid/*don't use this? wasn't sposedta?*/
-    (current_board, size) == false) {
+    else if (board_has_no_threes
+    (current_board, size) == false || board_has_no_duplicates(current_board, size)
+    == false){
         cout << "Sorry, that move violates a rule.";
         return false;
     }
