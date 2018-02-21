@@ -582,6 +582,38 @@ void test_check_valid_input() {
 }
 
 
-
+   void test_check_valid_move () {
+    int originalboard[MAX_SIZE][MAX_SIZE];
+       int currentboard[MAX_SIZE][MAX_SIZE];
+    
+    string test_board_1[] = {"----",
+                             "-X--",
+                             "----",
+                             "----"};
+    
+    string test_board_2[] = {"XXOO",
+                             "XXOO",
+                             "XOOX",
+                             "-XOX"};
+    
+    
+       read_board_from_string(originalboard, test_board_1, 4);
+       read_board_from_string(currentboard, test_board_2, 4);
+       
+       cout << "False" << endl;
+       cout << check_valid_move(test_board_1, test_board_2, 4, 1, 1, BLUE);
+       
+       cout << "True" << endl;
+       cout << check_valid_move(test_board_1, test_board_1, 4, 0, 0, BLUE);
+       
+       cout << "True" << endl;
+       cout << check_valid_move(test_board_1, test_board_2, 4, 3, 0, BLUE);
+       
+       cout << "True" << endl;
+       cout << check_valid_move(test_board_1, test_board_2, 4, 0, 2, UNKNOWN);
+       
+       cout << "False" << endl;
+       cout << check_valid_move(test_board_1, test_board_2, 4, 0, 3, BLUE);
+ }
 
 
