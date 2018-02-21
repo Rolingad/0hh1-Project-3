@@ -527,8 +527,8 @@ void test_board_is_solved() {
     
     string test_board_2[] = {"XOXO",
                              "XOXO",
-                             "--X-",
-                             "----"};
+                             "XXOO",
+                             "OOXX"};
     
     cout << "false" << endl;
     read_board_from_string(board, test_board_2, 4);
