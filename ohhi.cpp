@@ -5,10 +5,10 @@
  * Project 3: 0h h1
  * Winter 2018
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <#Nathan Fialkoff and Mary Reiber#>
+ * <#npfialk and reiberm(s)#>
  *
- * <#A description of the project here#>
+ * <#Some blue and red dots#>
  */
 
 #include <iostream>
@@ -92,6 +92,22 @@ bool row_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
             }
        
     }
+
+    if (color == UNKNOWN) {
+        int i = row;
+        //iterate through columns in row
+        for (int j = 0; j < size - 2; j++) {
+            if (ThreeOrNot == true) {
+                if ((board[i][j] == 1) && (board[i][j + 1] == 1) && (board[i][j + 2] == 1)) {
+                    ThreeOrNot = false;
+                }
+                else {
+                    ThreeOrNot = true;
+                }
+            }
+        }
+
+    }
     return ThreeOrNot;
     //TESTED THANK GOD OMG THAT TOOK SO LONG FUCKING SHIT
 }
@@ -126,6 +142,21 @@ bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
 
     //blue
     if (color == BLUE) {
+        int i = col;
+        //iterate through columns in row
+        for (int j = 0; j < size - 2; j++) {
+            if (ThreeOrNot == true) {
+                if ((board[j][i] == 2) && (board[j + 1][i] == 2) && (board[j + 2][i] == 2)) {
+                    ThreeOrNot = false;
+                }
+                else {
+                    ThreeOrNot = true;
+                }
+            }
+        }
+    }
+
+    if (color == UNKNOWN) {
         int i = col;
         //iterate through columns in row
         for (int j = 0; j < size - 2; j++) {
@@ -592,10 +623,26 @@ bool check_valid_input(int size, int row_input, char col_input,
 bool check_valid_move(const int original_board[MAX_SIZE][MAX_SIZE],
                       const int current_board[MAX_SIZE][MAX_SIZE],
                       int size, int row, int col, int color) {
-    // write your code here
+    
+    if (original_board[row][col] != 0) {
+        cout << "Sorry, original squares cannot be changed.";
+        return false;
+    }
+    else if (board_is_valid/*don't use this? wasn't sposedta?*/
+    (current_board, size) == false) {
+        cout << "Sorry, that move violates a rule.";
+        return false;
+    }
+    else {
+        return true;
+    
 
-    // replace this return statement
-    return false;
+    }
+
+
+
+
+
 }
 
 
