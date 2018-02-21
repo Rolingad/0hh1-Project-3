@@ -27,6 +27,7 @@ void test_solve_three_in_a_col();
 void test_solve_balance_row();
 void test_solve_balance_column();
 void test_board_is_solved();
+void test_check_valid_input();
 
 
 // declare more test functions here
@@ -65,8 +66,11 @@ int main() {
 
     test_solve_balance_column();
     cout << endl;
-    
-    test_board_is_solved():
+
+    test_board_is_solved();
+    cout << endl; 
+
+    test_check_valid_input();
     cout << endl;
 
 
@@ -344,6 +348,15 @@ void test_board_has_no_duplicates() {
 
     read_board_from_string(board, test_board_3, 4);
     cout << "false, " << board_has_no_duplicates(board, 4) << endl;
+
+    string test_board_4[] = {
+        "XOXO",
+        "OXOX",
+        "OOXX",
+        "XXOO" };
+
+    read_board_from_string(board, test_board_4, 4);
+    cout << "true, " << board_has_no_duplicates(board, 4) << endl;
 }
 
 void test_solve_three_in_a_row() {
@@ -491,67 +504,84 @@ void test_solve_balance_column() {
 
 }
 
-
-void test_board_has_no_duplicates() {
-    int board[MAX_SIZE][MAX_SIZE];
-    
-    // test case
-    
-    string test_board_1[] = {"XOXO",
-                             "XOXO",
-                             "--X-",
-                             "----"};
-    
-    read_board_from_string(board, test_board_1, 4);
-    cout << board_has_no_duplicates(board, 4) << endl;
-    
-    string test_board_2[] = {"XOX-",
-                             "XOXO",
-                             "--X-",
-                             "O---"};
-    
-    read_board_from_string(board, test_board_2, 4);
-    cout << board_has_no_duplicates(board, 4) << endl;
-}
-
 void test_board_is_solved() {
     int board[MAX_SIZE][MAX_SIZE];
-    
-    string test_board_1[] = {"XXXO",
-                             "O--0",
-                             "--X-",
-                             "-O--"};
+
+    string test_board_1[] = { 
+        "XXXO",
+        "O--O",
+        "--X-",
+        "-O--" };
     cout << "false" << endl;
     read_board_from_string(board, test_board_1, 4);
     cout << board_is_solved(board, 4) << endl;
-    
-    string test_board_2[] = {"XOXO",
-                             "XOXO",
-                             "XXOO",
-                             "OOXX"};
-    
+
+    string test_board_2[] = { "XOXO",
+        "XOXO",
+        "--X-",
+        "----" };
+
     cout << "false" << endl;
     read_board_from_string(board, test_board_2, 4);
     cout << board_is_solved(board, 4) << endl;
-    
-    string test_board_3[] = {"XOXO",
-                             "XOOX",
-                             "X---",
-                             "---O"};
-    
+
+    string test_board_3[] = { "XOXO",
+        "XOOX",
+        "X---",
+        "---O" };
+
     cout << "false" << endl;
     read_board_from_string(board, test_board_3, 4);
     cout << board_is_solved(board, 4) << endl;
-    
-    string test_board_4[] = {"XOOX",
-                             "XOXO",
-                             "XXOO",
-                             "OOXX"};
+
+    string test_board_4[] = { 
+        "XOOX",
+        "XOXO",
+        "OXXO",
+        "OXOX" };
 
     cout << "true" << endl;
     read_board_from_string(board, test_board_4, 4);
     cout << board_is_solved(board, 4) << endl;
-    
+
 }
+
+void test_check_valid_input() {
+    int row = 1;
+    int col = 1;
+
+    cout << endl << "true, " << 
+        check_valid_input(6, 5, 'A', RED_LETTER, row, col);
+
+    cout << endl << row << "," << col;
+
+    cout << endl << "true, " <<
+        check_valid_input(6, 3, 'c', RED_LETTER, row, col);
+
+    cout << endl << row << "," << col;
+
+    cout << endl << "true, " <<
+        check_valid_input(6, 4, 'D', RED_LETTER, row, col);
+
+    cout << endl << row << "," << col;
+
+    cout << endl << "false, " <<
+        check_valid_input(4, 5, 'A', RED_LETTER, row, col);
+
+    cout << endl << row << "," << col;
+
+    cout << endl << "false, " <<
+        check_valid_input(6, 5, '@', RED_LETTER, row, col);
+
+    cout << endl << row << "," << col;
+
+    cout << endl << "false, " <<
+        check_valid_input(6, 5, 'A', 'K', row, col);
+
+    cout << endl << row << "," << col;
+}
+
+
+
 
 

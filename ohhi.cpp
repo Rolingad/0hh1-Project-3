@@ -287,7 +287,7 @@ bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
     
     //cols
     for (int col1 = 0; col1 < size; col1++) {
-        for (int col2 = 0; col2 < size; col2++) {
+        for (int col2 = col1 + 1; col2 < size; col2++) {
             if (NoColDups == true) {
                 if (cols_are_different(board, size, col1, col2) == true) {
                     NoColDups = true;
@@ -305,7 +305,8 @@ bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
     else {
         return false;
     }
-    //TESTED (mostly)
+    //TESTED (mostly) yeah fuck you nate it was mostly tested 
+
 
 }
 
@@ -554,11 +555,38 @@ bool board_is_solved(const int board[MAX_SIZE][MAX_SIZE], int size) {
 }
 
 bool check_valid_input(int size, int row_input, char col_input,
-                       char color_char, int &row, int &col) {
-    // write your code here
+    char color_char, int &row, int &col) {
+    if (row_input > size || row_input < 1) {
 
-    // replace this return statement
-    return false;
+        cout << "Sorry, that's not a valid input.";
+        return false;
+    }
+
+    else if ((col_input < 'A' || col_input >('A' + size - 1)) &&
+        ((col_input < 'a' || col_input >('a' + size - 1)))) {
+
+        cout << "Sorry, that's not a valid input.";
+        return false;
+    }
+
+    else if (color_char != RED_LETTER && color_char != 'x'
+        && color_char != BLUE_LETTER && color_char != 'o' &&
+        color_char != '-') {
+
+        cout << "Sorry, that's not a valid input.";
+        return false;
+    }
+    else {
+        row = row_input - 1;
+        if (isupper(col_input)) {
+            col = col_input - 65;
+        }
+        else {
+            col = col_input - 97;
+        }
+        return true;
+
+    }
 }
 
 bool check_valid_move(const int original_board[MAX_SIZE][MAX_SIZE],
