@@ -529,8 +529,9 @@ void solve_balance_column(int board[MAX_SIZE][MAX_SIZE],
         }
     }
 
-
+    
     return;
+    //TESTED
 }
 
 
