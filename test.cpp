@@ -488,3 +488,66 @@ void test_solve_balance_column() {
 }
 
 
+void test_board_has_no_duplicates() {
+    int board[MAX_SIZE][MAX_SIZE];
+    
+    // test case
+    
+    string test_board_1[] = {"XOXO",
+                             "XOXO",
+                             "--X-",
+                             "----"};
+    
+    read_board_from_string(board, test_board_1, 4);
+    cout << board_has_no_duplicates(board, 4) << endl;
+    
+    string test_board_2[] = {"XOX-",
+                             "XOXO",
+                             "--X-",
+                             "O---"};
+    
+    read_board_from_string(board, test_board_2, 4);
+    cout << board_has_no_duplicates(board, 4) << endl;
+}
+
+void test_board_is_solved() {
+    int board[MAX_SIZE][MAX_SIZE];
+    
+    string test_board_1[] = {"XXXO",
+                             "O--0",
+                             "--X-",
+                             "-O--"};
+    cout << "false" << endl;
+    read_board_from_string(board, test_board_1, 4);
+    cout << board_is_solved(board, 4) << endl;
+    
+    string test_board_2[] = {"XOXO",
+                             "XOXO",
+                             "--X-",
+                             "----"};
+    
+    cout << "false" << endl;
+    read_board_from_string(board, test_board_2, 4);
+    cout << board_is_solved(board, 4) << endl;
+    
+    string test_board_3[] = {"XOXO",
+                             "XOOX",
+                             "X---",
+                             "---O"};
+    
+    cout << "false" << endl;
+    read_board_from_string(board, test_board_3, 4);
+    cout << board_is_solved(board, 4) << endl;
+    
+    string test_board_4[] = {"XOOX",
+                             "XOXO",
+                             "XXOO",
+                             "OOXX"};
+
+    cout << "true" << endl;
+    read_board_from_string(board, test_board_4, 4);
+    cout << board_is_solved(board, 4) << endl;
+    
+}
+
+
