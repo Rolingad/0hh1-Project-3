@@ -5,10 +5,10 @@
  * Project 3: 0h h1 Test Suite
  * Winter 2018
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <#Nathan Fialkoff and Mary Reiber#>
+ * <#npfialk#> <#reiberm#>
  *
- * <#A description of the project here#>
+ * <#test cases for 0hh1 project#>
  */
 
 #include <iostream>
@@ -402,6 +402,9 @@ void test_solve_three_in_a_row() {
     int size_1 = 4;
     read_board_from_string(board, test_board_1, size_1);
     solve_three_in_a_row(board, 4, 1, true);
+    solve_three_in_a_row(board, 4, 0, true);
+    solve_three_in_a_row(board, 4, 2, true);
+    solve_three_in_a_row(board, 4, 3, true);
     
     string test_board_2[] = {
         "OX-X",
@@ -413,6 +416,14 @@ void test_solve_three_in_a_row() {
     solve_three_in_a_row(board, 4, 2, true);
     solve_three_in_a_row(board, 4, 3, true);
     solve_three_in_a_row(board, 4, 0, true);
+    
+    string test_board_3[] = {"OOOX",
+                             "-XX-",
+                             "OX--",
+                             "-OO-" };
+    read_board_from_string(board, test_board_3, size_1);
+    solve_three_in_a_row(board, 4, 0, false);
+    solve_three_in_a_row(board, 4, 1, true);
     
     
     
@@ -443,6 +454,19 @@ void test_solve_three_in_a_col() {
     solve_three_in_a_column(board, 4, 2, true);
     solve_three_in_a_column(board, 4, 3, true);
     solve_three_in_a_column(board, 4, 0, true);
+    
+    string test_board_3[] = {
+        "XXOX",
+        "X-OX",
+        "OX-X",
+        "-OO-" };
+    read_board_from_string(board, test_board_3, size_1);
+    solve_three_in_a_column(board, 4, 3, false);
+    solve_three_in_a_column(board, 4, 2, true);
+    solve_three_in_a_column(board, 4, 1, true);
+    solve_three_in_a_column(board, 4, 0, true);
+    
+    
     
     //TESTED
     
@@ -610,36 +634,3 @@ void test_check_valid_input() {
     
     cout << endl << row << "," << col;
 }
-
-
-void test_check_valid_move() {
- //NEEDS WORK
- int originalboard[MAX_SIZE][MAX_SIZE];
- int currentboard[MAX_SIZE][MAX_SIZE];
- string test_board_1[] = { "----",
- "-X--",
- "----",
- "----" };
- string test_board_2[] = { "XXOO",
- "XXOO",
- "XOOX",
- "-XOX" };
- read_board_from_string(originalboard, test_board_1, 4);
- read_board_from_string(currentboard, test_board_2, 4);
- cout << "False" << endl;
- cout << check_valid_move(originalboard, currentboard, 4, 1, 1, BLUE);
- cout << "True" << endl;
- cout << check_valid_move(originalboard, currentboard, 4, 0, 0, BLUE);
- cout << "True" << endl;
- cout << check_valid_move(originalboard, currentboard, 4, 3, 0, BLUE);
- cout << "True" << endl;
- cout << check_valid_move(originalboard, currentboard, 4, 0, 2, UNKNOWN);
- cout << "False" << endl;
- cout << check_valid_move(originalboard, currentboard, 4, 0, 3, BLUE);
- }
- 
-    
-
-
-
-
