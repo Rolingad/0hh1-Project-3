@@ -28,6 +28,7 @@ void test_solve_balance_row();
 void test_solve_balance_col();
 void test_board_is_solved();
 void test_check_valid_input();
+void test_check_valid_move();
 
 
 // declare more test functions here
@@ -71,6 +72,9 @@ int main() {
     cout << endl;
     
     test_check_valid_input();
+    cout << endl;
+    
+    test_check_valid_move();
     cout << endl;
     
     
@@ -633,4 +637,40 @@ void test_check_valid_input() {
     check_valid_input(6, 5, 'A', 'K', row, col);
     
     cout << endl << row << "," << col;
+}
+
+void test_check_valid_move() {
+    cout << "testing check valid move: " << endl
+        << endl << endl;
+    int originalboard[MAX_SIZE][MAX_SIZE];
+    int currentboard[MAX_SIZE][MAX_SIZE];
+    string test_board_1[] = { 
+        "----",
+        "-X--",
+        "----",
+        "----" };
+    string test_board_2[] = { 
+        "---X",
+        "XXOO",
+        "OXOX",
+        "XOXO" };
+    read_board_from_string(originalboard, test_board_1, 4);
+    read_board_from_string(currentboard, test_board_2, 4);
+    cout << "False: " << endl;
+    cout << check_valid_move(originalboard, currentboard, 4, 1, 1, BLUE);
+    cout << endl;
+    cout << "True" << endl;
+    cout << check_valid_move(originalboard, currentboard, 4, 0, 0, BLUE);
+    cout << endl;
+    cout << "True" << endl;
+    cout << check_valid_move(originalboard, currentboard, 4, 3, 0, BLUE);
+    cout << endl;
+    cout << "True" << endl;
+    cout << check_valid_move(originalboard, currentboard, 4, 0, 2, UNKNOWN);
+    cout << endl;
+    cout << "true?" << endl;
+    cout << check_valid_move(originalboard, currentboard, 4, 0, 3, BLUE);
+    cout << endl;
+    cout << "False" << endl;
+    cout << check_valid_move(originalboard, currentboard, 4, 0, 1, RED);
 }
