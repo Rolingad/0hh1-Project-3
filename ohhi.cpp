@@ -542,10 +542,15 @@ void solve_balance_column(int board[MAX_SIZE][MAX_SIZE],
  */
 
 bool board_is_solved(const int board[MAX_SIZE][MAX_SIZE], int size) {
-    // write your code here
-
-    // replace this return statement
-    return false;
+    
+    if ((board_has_no_duplicates(board, size) == true) && (board_has_no_threes(board, size) 
+        == true) && (count_unknown_squares(board, size) == 0)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    
 }
 
 bool check_valid_input(int size, int row_input, char col_input,
