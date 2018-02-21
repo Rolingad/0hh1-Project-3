@@ -26,6 +26,7 @@ void test_solve_three_in_a_row();
 void test_solve_three_in_a_col();
 void test_solve_balance_row();
 void test_solve_balance_column();
+void test_board_is_solved();
 
 
 // declare more test functions here
@@ -63,6 +64,9 @@ int main() {
     cout << endl;
 
     test_solve_balance_column();
+    cout << endl;
+    
+    test_board_is_solved():
     cout << endl;
 
 
