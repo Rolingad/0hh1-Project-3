@@ -25,7 +25,7 @@ void test_board_has_no_duplicates();
 void test_solve_three_in_a_row();
 void test_solve_three_in_a_col();
 void test_solve_balance_row();
-void test_solve_balance_column();
+void test_solve_balance_col();
 void test_board_is_solved();
 void test_check_valid_input();
 
@@ -64,7 +64,7 @@ int main() {
     test_solve_balance_row();
     cout << endl;
 
-    test_solve_balance_column();
+    test_solve_balance_col();
     cout << endl;
 
     test_board_is_solved();
@@ -460,7 +460,7 @@ void test_solve_balance_row() {
     cout << endl;
 }
 
-void test_solve_balance_column() {
+void test_solve_balance_col() {
     int board[MAX_SIZE][MAX_SIZE];
 
     // test case 1
