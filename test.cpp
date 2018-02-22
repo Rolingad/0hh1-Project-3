@@ -1,15 +1,15 @@
 /**
- * test.cpp
- *
- * EECS 183
- * Project 3: 0h h1 Test Suite
- * Winter 2018
- *
- * <#Nathan Fialkoff and Mary Reiber#>
- * <#npfialk#> <#reiberm#>
- *
- * <#test cases for 0hh1 project#>
- */
+* test.cpp
+*
+* EECS 183
+* Project 3: 0h h1 Test Suite
+* Winter 2018
+*
+* <#Name(s)#>
+* <#uniqname(s)#>
+*
+* <#A description of the project here#>
+*/
 
 #include <iostream>
 #include "utility.h"
@@ -36,59 +36,59 @@ void test_check_valid_move();
 int main() {
     test_count_unknown_squares();
     cout << endl;
-    
+
     test_row_has_no_threes_of_color();
     cout << endl;
-    
+
     test_col_has_no_threes_of_color();
     cout << endl;
-    
+
     test_board_has_no_threes();
     cout << endl;
     cout << endl;
-    
+
     test_rows_are_different();
     cout << endl;
-    
+
     test_cols_are_different();
     cout << endl;
-    
+
     test_board_has_no_duplicates();
     cout << endl;
-    
+
     test_solve_three_in_a_row();
     cout << endl;
-    
+
     test_solve_three_in_a_col();
     cout << endl;
-    
+
     test_solve_balance_row();
     cout << endl;
-    
+
     test_solve_balance_col();
     cout << endl;
-    
+
     test_board_is_solved();
     cout << endl;
-    
+
     test_check_valid_input();
     cout << endl;
-    
+
     test_check_valid_move();
     cout << endl;
-    
-    
-    
-    
+
+
+
+
     // add your calls to test functions here
-    
+
     return 0;
 }
 
 
 void test_count_unknown_squares() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     // test case 1
     string test_board_1[] = { "XO-O",
         "--OO",
@@ -97,13 +97,13 @@ void test_count_unknown_squares() {
     int size_1 = 4;
     read_board_from_string(board, test_board_1, size_1);
     cout << count_unknown_squares(board, size_1) << endl;
-    
+
     // add more tests here
 }
 
 void test_row_has_no_threes_of_color() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     //test case 1
     string test_board_1[] = {
         "XO-O",
@@ -112,7 +112,7 @@ void test_row_has_no_threes_of_color() {
         "--O-" };
     read_board_from_string(board, test_board_1, 4);
     cout << "true, " << row_has_no_threes_of_color(board, 4, 0, RED) << endl;
-    
+
     string test_board_2[] = { "XXX-",
         "--OO",
         "---X",
@@ -120,14 +120,14 @@ void test_row_has_no_threes_of_color() {
     read_board_from_string(board, test_board_2, 4);
     cout << "false, " << row_has_no_threes_of_color(board, 4, 0, RED) << endl;
     cout << "true, " << row_has_no_threes_of_color(board, 4, 0, BLUE) << endl;
-    
+
     string test_board_3[] = { "XOX-",
         "X-OO",
         "X--X",
         "--O-" };
     read_board_from_string(board, test_board_3, 4);
     cout << "true, " << row_has_no_threes_of_color(board, 4, 2, BLUE) << endl;
-    
+
     string test_board_4[] = { "XOX-O-",
         "X-OOXX",
         "XXXOOO",
@@ -137,7 +137,7 @@ void test_row_has_no_threes_of_color() {
     read_board_from_string(board, test_board_4, 6);
     cout << "false, " << row_has_no_threes_of_color(board, 6, 2, BLUE) << endl;
     cout << "false, " << row_has_no_threes_of_color(board, 6, 2, RED) << endl;
-    
+
     string test_board_5[] = {
         "XOX-O-",
         "X-OOXX",
@@ -145,19 +145,19 @@ void test_row_has_no_threes_of_color() {
         "--O-XX",
         "------" ,
         "--O-XX"
-        
+
     };
     read_board_from_string(board, test_board_5, 6);
     cout << "false " << row_has_no_threes_of_color(board, 6, 4, UNKNOWN)
-    << endl;
+        << endl;
     cout << "true " << row_has_no_threes_of_color(board, 6, 4, BLUE);
-    
-    
+
+
 }
 
 void test_col_has_no_threes_of_color() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     //test case 1
     string test_board_1[] = {
         "XO-O",
@@ -166,7 +166,7 @@ void test_col_has_no_threes_of_color() {
         "--O-" };
     read_board_from_string(board, test_board_1, 4);
     cout << "true, " << col_has_no_threes_of_color(board, 4, 0, RED) << endl;
-    
+
     string test_board_2[] = {
         "XXX-",
         "--OO",
@@ -175,7 +175,7 @@ void test_col_has_no_threes_of_color() {
     read_board_from_string(board, test_board_2, 4);
     cout << "true, " << col_has_no_threes_of_color(board, 4, 2, RED) << endl;
     cout << "true, " << col_has_no_threes_of_color(board, 4, 2, BLUE) << endl;
-    
+
     string test_board_3[] = {
         "XOX-",
         "X-OO",
@@ -183,7 +183,7 @@ void test_col_has_no_threes_of_color() {
         "--O-" };
     read_board_from_string(board, test_board_3, 4);
     cout << "false, " << col_has_no_threes_of_color(board, 4, 0, RED) << endl;
-    
+
     string test_board_4[] = {
         "XOX-O-",
         "X-OOXX",
@@ -194,7 +194,7 @@ void test_col_has_no_threes_of_color() {
     read_board_from_string(board, test_board_4, 6);
     cout << "false, " << col_has_no_threes_of_color(board, 6, 0, RED) << endl;
     cout << "false, " << col_has_no_threes_of_color(board, 6, 2, BLUE) << endl;
-    
+
     string test_board_5[] = {
         "-OX-O-",
         "--OOXX",
@@ -202,24 +202,24 @@ void test_col_has_no_threes_of_color() {
         "--O-XX",
         "------" ,
         "--O-XX"
-        
+
     };
     read_board_from_string(board, test_board_5, 6);
     cout << "false " << col_has_no_threes_of_color(board, 6, 0, UNKNOWN)
-    << endl;
+        << endl;
     cout << "true " << col_has_no_threes_of_color(board, 6, 0, BLUE);
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 }
 
 void test_board_has_no_threes() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     //test case 1
     string test_board_1[] = {
         "XO-O",
@@ -228,7 +228,7 @@ void test_board_has_no_threes() {
         "--O-" };
     read_board_from_string(board, test_board_1, 4);
     cout << "true, " << board_has_no_threes(board, 4) << endl;
-    
+
     string test_board_2[] = {
         "XXX-",
         "--OO",
@@ -237,7 +237,7 @@ void test_board_has_no_threes() {
     read_board_from_string(board, test_board_2, 4);
     cout << "false, " << board_has_no_threes(board, 4) << endl;
     cout << "false, " << board_has_no_threes(board, 4) << endl;
-    
+
     string test_board_3[] = {
         "XOX-",
         "X-OO",
@@ -245,7 +245,7 @@ void test_board_has_no_threes() {
         "--O-" };
     read_board_from_string(board, test_board_3, 4);
     cout << "false, " << board_has_no_threes(board, 4) << endl;
-    
+
     string test_board_4[] = {
         "XOX-O-",
         "X-OOXX",
@@ -256,7 +256,7 @@ void test_board_has_no_threes() {
     read_board_from_string(board, test_board_4, 6);
     cout << "false, " << board_has_no_threes(board, 6) << endl;
     cout << "false, " << board_has_no_threes(board, 6) << endl;
-    
+
     string test_board_5[] = {
         "XOX-O--O",
         "O-OOXXO-",
@@ -268,135 +268,147 @@ void test_board_has_no_threes() {
         "OXOXOXOX" };
     read_board_from_string(board, test_board_5, 8);
     cout << "true, " << board_has_no_threes(board, 8);
-    
+
+    string test_board_6[] = {
+        "-X-X",
+        "XXOO",
+        "OXOX",
+        "XOXO" };
+    read_board_from_string(board, test_board_6, 4);
+    cout << endl << endl << endl << endl;
+    cout << "false, " << board_has_no_threes(board, 8);
+    cout << endl << endl << endl << endl;
+
 }
 
 void test_rows_are_different() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     // test case 2
     string test_board_1[] = {
         "XXOO",
         "XXOO",
         "----",
         "----" };
-    
+
     read_board_from_string(board, test_board_1, 4);
     cout << "false, " << rows_are_different(board, 4, 0, 1) << endl;
-    
+
     string test_board_2[] = {
         "XOXO",
         "XOXO",
         "----",
         "----", };
-    
+
     read_board_from_string(board, test_board_2, 4);
     cout << "false, " << rows_are_different(board, 4, 0, 1) << endl;
-    
+
     string test_board_3[] = {
         "XOXO",
         "XOX-",
         "----",
         "----", };
-    
+
     read_board_from_string(board, test_board_3, 4);
     cout << "true, " << rows_are_different(board, 4, 0, 1) << endl;
     cout << "true, " << rows_are_different(board, 4, 1, 2) << endl;
-    
+
 }
 
 void test_cols_are_different() {
     int board[MAX_SIZE][MAX_SIZE];
-    
-    
+
+
     string test_board_1[] = {
         "OOXO",
         "OO-X",
         "XX-O",
         "OO-X" };
-    
+
     cout << "return false" << endl;
     read_board_from_string(board, test_board_1, 4);
     cout << cols_are_different(board, 4, 0, 1) << endl;
-    
+
     string test_board_2[] = {
         "--XX",
         "--XX",
         "--OO",
         "--OO" };
-    
+
     cout << "return false" << endl;
     read_board_from_string(board, test_board_2, 4);
     cout << cols_are_different(board, 4, 2, 3) << endl;
-    
+
     string test_board_3[] = {
         "--XX",
         "--XX",
         "--OO",
         "--OO" };
-    
+
     cout << "return true" << endl;
     read_board_from_string(board, test_board_3, 4);
     cout << cols_are_different(board, 4, 0, 1) << endl;
-    
+
     string test_board_4[] = {
         "XO--",
         "X---",
         "OOO-",
         "-XOO" };
-    
+
     cout << "return true" << endl;
     read_board_from_string(board, test_board_4, 4);
     cout << cols_are_different(board, 4, 1, 2) << endl;
-    
+
 }
 
 void test_board_has_no_duplicates() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     // test case
-    
+
     string test_board_1[] = {
         "XOXO",
         "XOXO",
         "--X-",
         "----" };
-    
+
     read_board_from_string(board, test_board_1, 4);
     cout << "false, " << board_has_no_duplicates(board, 4) << endl;
-    
+
     string test_board_2[] = {
         "XOX-",
         "XOXO",
         "--X-",
         "O---" };
-    
+
     read_board_from_string(board, test_board_2, 4);
     cout << "true, " << board_has_no_duplicates(board, 4) << endl;
-    
+
     string test_board_3[] = {
         "X-X-",
         "X-XO",
         "O-O-",
         "O-O-" };
-    
+
     read_board_from_string(board, test_board_3, 4);
     cout << "false, " << board_has_no_duplicates(board, 4) << endl;
-    
+
     string test_board_4[] = {
         "XOXO",
         "OXOX",
         "OOXX",
         "XXOO" };
-    
+
     read_board_from_string(board, test_board_4, 4);
     cout << "true, " << board_has_no_duplicates(board, 4) << endl;
 }
 
 void test_solve_three_in_a_row() {
-    
+
     int board[MAX_SIZE][MAX_SIZE];
-    
+
+    cout << "Testing solve three in a row: ";
+
     // test case 1
     string test_board_1[] = {
         "XO-O",
@@ -406,10 +418,7 @@ void test_solve_three_in_a_row() {
     int size_1 = 4;
     read_board_from_string(board, test_board_1, size_1);
     solve_three_in_a_row(board, 4, 1, true);
-    solve_three_in_a_row(board, 4, 0, true);
-    solve_three_in_a_row(board, 4, 2, true);
-    solve_three_in_a_row(board, 4, 3, true);
-    
+
     string test_board_2[] = {
         "OX-X",
         "XX--",
@@ -420,23 +429,16 @@ void test_solve_three_in_a_row() {
     solve_three_in_a_row(board, 4, 2, true);
     solve_three_in_a_row(board, 4, 3, true);
     solve_three_in_a_row(board, 4, 0, true);
-    
-    string test_board_3[] = {"OOOX",
-                             "-XX-",
-                             "OX--",
-                             "-OO-" };
-    read_board_from_string(board, test_board_3, size_1);
-    solve_three_in_a_row(board, 4, 0, false);
-    solve_three_in_a_row(board, 4, 1, true);
-    
-    
-    
-    
+
+
+
+
 }
 
 void test_solve_three_in_a_col() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
+    cout << "testing solve three in column: ";
     // test case 1
     string test_board_1[] = {
         "XO-O",
@@ -447,7 +449,7 @@ void test_solve_three_in_a_col() {
     read_board_from_string(board, test_board_1, size_1);
     solve_three_in_a_column(board, 4, 0, true);
     cout << endl;
-    
+
     string test_board_2[] = {
         "OXOX",
         "--OX",
@@ -458,31 +460,18 @@ void test_solve_three_in_a_col() {
     solve_three_in_a_column(board, 4, 2, true);
     solve_three_in_a_column(board, 4, 3, true);
     solve_three_in_a_column(board, 4, 0, true);
-    
-    string test_board_3[] = {
-        "XXOX",
-        "X-OX",
-        "OX-X",
-        "-OO-" };
-    read_board_from_string(board, test_board_3, size_1);
-    solve_three_in_a_column(board, 4, 3, false);
-    solve_three_in_a_column(board, 4, 2, true);
-    solve_three_in_a_column(board, 4, 1, true);
-    solve_three_in_a_column(board, 4, 0, true);
-    
-    
-    
+
     //TESTED
-    
-    
+
+
 }
 
 void test_solve_balance_row() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     // test case 1
     cout << "testing balance row" << endl;
-    
+
     string test_board_1[] = {
         "XO-O",
         "--OO",
@@ -495,7 +484,7 @@ void test_solve_balance_row() {
     solve_balance_row(board, 4, 2, true);
     cout << endl;
     cout << endl;
-    
+
     string test_board_2[] = {
         "XX-X--",
         "O-OO--",
@@ -520,10 +509,10 @@ void test_solve_balance_row() {
 
 void test_solve_balance_col() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     // test case 1
     cout << "testing balance column" << endl;
-    
+
     string test_board_1[] = {
         "XO-O",
         "--OO",
@@ -536,7 +525,7 @@ void test_solve_balance_col() {
     solve_balance_column(board, 4, 3, true);
     cout << endl;
     cout << endl;
-    
+
     string test_board_2[] = {
         "XO-XO-",
         "XOXOOX",
@@ -557,14 +546,14 @@ void test_solve_balance_col() {
     cout << endl;
     solve_balance_column(board, 6, 5, true);
     cout << endl;
-    
+
     //TESTED
-    
+
 }
 
 void test_board_is_solved() {
     int board[MAX_SIZE][MAX_SIZE];
-    
+
     string test_board_1[] = {
         "XXXO",
         "O--O",
@@ -573,71 +562,72 @@ void test_board_is_solved() {
     cout << "false" << endl;
     read_board_from_string(board, test_board_1, 4);
     cout << board_is_solved(board, 4) << endl;
-    
+
     string test_board_2[] = { "XOXO",
         "XOXO",
         "--X-",
         "----" };
-    
+
     cout << "false" << endl;
     read_board_from_string(board, test_board_2, 4);
     cout << board_is_solved(board, 4) << endl;
-    
+
     string test_board_3[] = { "XOXO",
         "XOOX",
         "X---",
         "---O" };
-    
+
     cout << "false" << endl;
     read_board_from_string(board, test_board_3, 4);
     cout << board_is_solved(board, 4) << endl;
-    
+
     string test_board_4[] = {
         "XOOX",
         "XOXO",
         "OXXO",
         "OXOX" };
-    
+
     cout << "true" << endl;
     read_board_from_string(board, test_board_4, 4);
     cout << board_is_solved(board, 4) << endl;
-    
+
 }
 
 void test_check_valid_input() {
     int row = 1;
     int col = 1;
-    
+
     cout << endl << "true, " <<
-    check_valid_input(6, 5, 'A', RED_LETTER, row, col);
-    
+        check_valid_input(6, 5, 'A', RED_LETTER, row, col);
+
     cout << endl << row << "," << col;
-    
+
     cout << endl << "true, " <<
-    check_valid_input(6, 3, 'c', RED_LETTER, row, col);
-    
+        check_valid_input(6, 3, 'c', RED_LETTER, row, col);
+
     cout << endl << row << "," << col;
-    
+
     cout << endl << "true, " <<
-    check_valid_input(6, 4, 'D', RED_LETTER, row, col);
-    
+        check_valid_input(6, 4, 'D', RED_LETTER, row, col);
+
     cout << endl << row << "," << col;
-    
+
     cout << endl << "false, " <<
-    check_valid_input(4, 5, 'A', RED_LETTER, row, col);
-    
+        check_valid_input(4, 5, 'A', RED_LETTER, row, col);
+
     cout << endl << row << "," << col;
-    
+
     cout << endl << "false, " <<
-    check_valid_input(6, 5, '@', RED_LETTER, row, col);
-    
+        check_valid_input(6, 5, '@', RED_LETTER, row, col);
+
     cout << endl << row << "," << col;
-    
+
     cout << endl << "false, " <<
-    check_valid_input(6, 5, 'A', 'K', row, col);
-    
+        check_valid_input(6, 5, 'A', 'K', row, col);
+
     cout << endl << row << "," << col;
 }
+
 
 void test_check_valid_move() {
     cout << "testing check valid move: " << endl
@@ -662,13 +652,13 @@ void test_check_valid_move() {
     cout << "True" << endl;
     cout << check_valid_move(originalboard, currentboard, 4, 0, 0, BLUE);
     cout << endl;
-    cout << "True" << endl;
+    cout << "False" << endl;
     cout << check_valid_move(originalboard, currentboard, 4, 3, 0, BLUE);
     cout << endl;
     cout << "True" << endl;
     cout << check_valid_move(originalboard, currentboard, 4, 0, 2, UNKNOWN);
     cout << endl;
-    cout << "true?" << endl;
+    cout << "False" << endl;
     cout << check_valid_move(originalboard, currentboard, 4, 0, 3, BLUE);
     cout << endl;
     cout << "False" << endl;
