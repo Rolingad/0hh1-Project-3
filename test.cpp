@@ -408,6 +408,7 @@ void test_solve_three_in_a_row() {
     int board[MAX_SIZE][MAX_SIZE];
 
     cout << "Testing solve three in a row: ";
+    cout << endl;
 
     // test case 1
     string test_board_1[] = {
@@ -418,6 +419,7 @@ void test_solve_three_in_a_row() {
     int size_1 = 4;
     read_board_from_string(board, test_board_1, size_1);
     solve_three_in_a_row(board, 4, 1, true);
+    solve_three_in_a_row(board, 4, 2, true);
 
     string test_board_2[] = {
         "OX-X",
@@ -447,6 +449,7 @@ void test_solve_three_in_a_col() {
         "--O-" };
     int size_1 = 4;
     read_board_from_string(board, test_board_1, size_1);
+    cout << "test 1: " << endl;
     solve_three_in_a_column(board, 4, 0, true);
     cout << endl;
 
@@ -456,9 +459,13 @@ void test_solve_three_in_a_col() {
         "OX--",
         "-OX-" };
     read_board_from_string(board, test_board_2, size_1);
+    cout << "test 1: " << endl;
     solve_three_in_a_column(board, 4, 1, true);
+    cout << "test 2: " << endl;
     solve_three_in_a_column(board, 4, 2, true);
+    cout << "test 3: " << endl;
     solve_three_in_a_column(board, 4, 3, true);
+    cout << "test 4: " << endl;
     solve_three_in_a_column(board, 4, 0, true);
 
     //TESTED

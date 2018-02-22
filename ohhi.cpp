@@ -53,7 +53,7 @@ bool row_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
 
     // Checking red
     int i = row;
-    
+
     //iterate through the columns in a row
     for (int j = 0; j < size - 2; j++) {
         if (ThreeOrNot == true) {
@@ -200,7 +200,7 @@ bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
             return true;
         }
     }
-    
+
     for (col = 0; col < size; col++) {
         if (board[row1][col] == board[row2][col]) {
             rowCounter += 1;
@@ -314,20 +314,23 @@ void solve_three_in_a_row(int board[MAX_SIZE][MAX_SIZE],
     for (col = 0; col < size /* - 2? */; col++) {
         for (col = 0; col < size /* - 2? */; col++) {
             if ((board[row][col] == RED) && board[row][col + 1] == RED) {
-                if (col == 0 && (col + 2 == UNKNOWN)) { //add marking spot must be equal to unknown
+                if (col == 0 && board[row][col + 2] == UNKNOWN) { 
                     mark_square_as(board, size, row, col + 2, BLUE, announce);
 
                 }
-                else if (col == size - 1 && (col - 2 == UNKNOWN)) {
+                else if (col == size - 1 && (board[row][col - 2] == UNKNOWN)) {
                     mark_square_as(board, size, row, col - 2, BLUE, announce);
                 }
 
-                else if (col == size - 2 && (col - 1 == UNKNOWN)) {
+                else if (col == size - 2 && (board[row][col - 1] == UNKNOWN)) {
                     mark_square_as(board, size, row, col - 1, BLUE, announce);
                 }
                 else {
-                    if (col + 2 == UNKNOWN && col - 1 == UNKNOWN) {
+                    if (board[row][col + 2] == UNKNOWN) {
                         mark_square_as(board, size, row, col + 2, BLUE, announce);
+                    }
+                    if (board[row][col - 1] == UNKNOWN) {
+                        
                         mark_square_as(board, size, row, col - 1, BLUE, announce);
                     }
                 }
@@ -335,20 +338,23 @@ void solve_three_in_a_row(int board[MAX_SIZE][MAX_SIZE],
             }
 
             else if ((board[row][col] == BLUE) && board[row][col + 1] == BLUE) {
-                if (col == 0 && (col + 2 == UNKNOWN)) { //add marking spot must be equal to unknown
+                if (col == 0 && (board[row][col + 2] == UNKNOWN)) { //add marking spot must be equal to unknown
                     mark_square_as(board, size, row, col + 2, RED, announce);
 
                 }
-                else if (col == size - 1 && (col - 2 == UNKNOWN)) {
+                else if (col == size - 1 && (board[row][col - 2] == UNKNOWN)) {
                     mark_square_as(board, size, row, col - 2, RED, announce);
                 }
 
-                else if (col == size - 2 && (col - 1 == UNKNOWN)) {
+                else if (col == size - 2 && (board[row][col - 1] == UNKNOWN)) {
                     mark_square_as(board, size, row, col - 1, RED, announce);
                 }
                 else {
-                    if (col + 2 == UNKNOWN && col - 1 == UNKNOWN) {
+                    if (board[row][col + 2] == UNKNOWN) {
                         mark_square_as(board, size, row, col + 2, RED, announce);
+                    }
+                    if (board[row][col - 1] == UNKNOWN) {
+                        
                         mark_square_as(board, size, row, col - 1, RED, announce);
                     }
                 }
@@ -357,13 +363,15 @@ void solve_three_in_a_row(int board[MAX_SIZE][MAX_SIZE],
             }
 
             // If the two moves are separate red
-            else if (((board[row][col] == BLUE) && board[row][col + 2] == BLUE) && (col + 1 == UNKNOWN)) {
+            else if (((board[row][col] == BLUE) && board[row][col + 2] == BLUE) 
+                && (board[row][col + 1] == UNKNOWN)) {
                 mark_square_as(board, size, row, col + 1, RED, announce);
 
             }
 
             //If the two moves are separate blue
-            else if (((board[row][col] == RED) && board[row][col + 2] == RED) && (col + 1 == UNKNOWN)) {
+            else if (((board[row][col] == RED) && board[row][col + 2] == RED) 
+                && (board[row][col + 1] == UNKNOWN)) {
                 mark_square_as(board, size, row, col + 1, BLUE, announce);
 
             }
@@ -385,67 +393,72 @@ void solve_three_in_a_column(int board[MAX_SIZE][MAX_SIZE],
         return;
     }
     //Checking two moves in row
-  //  for (row = 0; row < size /* - 2? */; row++) {
-        for (row = 0; row < size /* - 2? */; row++) {
-            if ((board[row][col] == RED) && board[row + 1][col] == RED) {
-                if ((row == 0) && (row + 2 == UNKNOWN)) {
+    for (row = 0; row < size /* - 2? */; row++) {
+    for (row = 0; row < size /* - 2? */; row++) {
+        if ((board[row][col] == RED) && board[row + 1][col] == RED) {
+            if ((row == 0) && (board[row + 2][col] == UNKNOWN)) {
+                mark_square_as(board, size, row + 2, col, BLUE, announce);
+
+            }
+            else if ((row == size - 1) && (board[row - 2][col] == UNKNOWN)) {
+                mark_square_as(board, size, row - 2, col, BLUE, announce);
+            }
+
+            else if (row == size - 2 && (board[row - 1][col] == UNKNOWN)) {
+                mark_square_as(board, size, row - 1, col, BLUE, announce);
+            }
+            else {
+                if ((board[row + 2][col] == UNKNOWN)) {
                     mark_square_as(board, size, row + 2, col, BLUE, announce);
-
                 }
-                else if ((row == size - 1) && (row - 2 == UNKNOWN)) {
-                    mark_square_as(board, size, row - 2, col, BLUE, announce);
-                }
-
-                else if (row == size - 2 && (row - 1 == UNKNOWN)) {
+                if ((board[row - 1][col] == UNKNOWN)) {
+                    
                     mark_square_as(board, size, row - 1, col, BLUE, announce);
                 }
-                else {
-                    if ((row + 2 == UNKNOWN) && (row - 1 == UNKNOWN)) {
-                        mark_square_as(board, size, row + 2, col, BLUE, announce);
-                        mark_square_as(board, size, row - 1, col, BLUE, announce);
-                    }
-                }
-
             }
 
-            else if ((board[row][col] == BLUE) && board[row + 1][col] == BLUE) {
-                if (row == 0 && (row + 2 == UNKNOWN)) {
-                    mark_square_as(board, size, row + 2, col, RED, announce);
-
-                }
-                else if (row == size - 1 && (row - 2 == UNKNOWN)) {
-                    mark_square_as(board, size, row - 2, col, RED, announce);
-                }
-                else if (row == size - 2 && (row - 1 == UNKNOWN)) {
-                    mark_square_as(board, size, row - 1, col, RED, announce);
-                }
-                else {
-                    if ((row + 2 == UNKNOWN) && (row - 1 == UNKNOWN)) {
-                        mark_square_as(board, size, row + 2, col, RED, announce);
-                        mark_square_as(board, size, row - 1, col, RED, announce);
-                    }
-                }
-
-
-            }
-
-            // Checking two separate red moves
-            else if ((board[row][col] == BLUE) && board[row + 2][col] == BLUE) {
-                if (row + 1 == UNKNOWN) {
-                    mark_square_as(board, size, row + 1, col, RED, announce);
-                }
-
-            }
-
-            // Checking two separate blue moves
-            else if ((board[row][col] == RED) && board[row + 2][col] == RED) {
-                if (row + 1 == UNKNOWN) {
-                    mark_square_as(board, size, row + 1, col, BLUE, announce);
-                }
-            }
         }
 
-   // }
+        else if ((board[row][col] == BLUE) && board[row + 1][col] == BLUE) {
+            if (row == 0 && (board[row + 2][col] == UNKNOWN)) {
+                mark_square_as(board, size, row + 2, col, RED, announce);
+
+            }
+            else if (row == size - 1 && (board[row - 2][col] == UNKNOWN)) {
+                mark_square_as(board, size, row - 2, col, RED, announce);
+            }
+            else if (row == size - 2 && (board[row - 1][col] == UNKNOWN)) {
+                mark_square_as(board, size, row - 1, col, RED, announce);
+            }
+            else {
+                if ((board[row + 2][col] == UNKNOWN)) {
+                    mark_square_as(board, size, row + 2, col, RED, announce);
+                    }
+                if ((board[row - 1][col] == UNKNOWN)) {
+                    mark_square_as(board, size, row - 1, col, RED, announce);
+                }
+            }
+
+
+        }
+
+        // Checking two separate blue moves
+        else if ((board[row][col] == BLUE) && board[row + 2][col] == BLUE) {
+            if (board[row + 1][col] == UNKNOWN) {
+                mark_square_as(board, size, row + 1, col, RED, announce);
+            }
+
+        }
+
+        // Checking two separate red moves
+        else if ((board[row][col] == RED) && board[row + 2][col] == RED) {
+            if (board[row + 1][col] == UNKNOWN) {
+                mark_square_as(board, size, row + 1, col, BLUE, announce);
+            }
+        }
+    }
+
+    }
     return;
 }
 
@@ -600,7 +613,7 @@ bool check_valid_move(const int original_board[MAX_SIZE][MAX_SIZE],
         }
 
         mark_square_as(checkCurrentBoard, size, row, col, color, false);
-        
+
         if (board_is_valid(checkCurrentBoard, size) == false) {
 
             cout << "Sorry, that move violates a rule.";
