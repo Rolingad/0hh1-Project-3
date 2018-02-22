@@ -6,9 +6,9 @@
  * Winter 2018
  *
  * <#Nathan Fialkoff and Mary Reiber#>
- * <#npfialk and reiberm(s)#>
+ * <#npfialk reiberm#>
  *
- * <#Some blue and red dots#>
+ * <#Project three, 0hh1, a logic puzzle game with red and blue dots#>
  */
 
 #include <iostream>
@@ -22,6 +22,7 @@
  * --------------------------------------------------------
  */
 
+// Counts the number of unknown squares in a board
 int count_unknown_squares(const int board[MAX_SIZE][MAX_SIZE], int size) {
     int numUnknown = 0;
     for (int i = 0; i < size; i++) {
@@ -29,106 +30,61 @@ int count_unknown_squares(const int board[MAX_SIZE][MAX_SIZE], int size) {
         {
             if (board[i][j] == 0) {
                 numUnknown += 1;
-        }
-
+            }
+            
         }
         
     }
-    return numUnknown; //TESTED
+    return numUnknown;
 }
 
-
-/**
- * --------------------------------------------------------
- * --------- VALIDITY CHECKING FUNCTIONS ------------------
- * --------------------------------------------------------
- */
-
+// Ensures that a row does not have three moves next to each other in succession
 bool row_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
                                 int size,
                                 int row,
                                 int color) {
     bool ThreeOrNot = true;
-    int redCounter = 0;
-    int blueCounter = 0;
-
+    
+    
     if (size == 2) {
         return true;
     }
-
-    //red
-    if (color == RED) {
-        int i = row;
-        //iterate through columns in row
-            for (int j = 0; j < size - 2; j++) {
-                if (ThreeOrNot == true) {
-                    if ((board[i][j] == 1) && (board[i][j + 1] == 1) && (board[i][j + 2] == 1)) {
-                        ThreeOrNot = false;
-                    }
-                    else {
-                        ThreeOrNot = true;
-                    }
-                }
+    
+    // Checking red
+    int i = row;
+    
+    //iterate through the columns in a row
+    for (int j = 0; j < size - 2; j++) {
+        if (ThreeOrNot == true) {
+            if ((board[i][j] == color) && (board[i][j + 1] == color) &&
+                (board[i][j + 2] == color)) {
+                ThreeOrNot = false;
             }
-        
-    }
-
-    //blue
-    if (color == BLUE) {
-        int i = row;
-        //iterate through columns in row
-        
-            for (int j = 0; j < size - 2; j++) {
-                if (ThreeOrNot == true) {
-
-                    if ((board[i][j] == 2) && (board[i][j + 1] == 2) && (board[i][j + 2] == 2)) {
-
-                        ThreeOrNot = false;
-                    }
-                    else {
-                        ThreeOrNot = true;
-                    }
-                }
-            }
-       
-    }
-
-    //Unknown
-    if (color == UNKNOWN) {
-        int i = row;
-        //iterate through columns in row
-        for (int j = 0; j < size - 2; j++) {
-            if (ThreeOrNot == true) {
-                if ((board[i][j] == 0) && (board[i][j + 1] == 0) && (board[i][j + 2] == 0)) {
-                    ThreeOrNot = false;
-                }
-                else {
-                    ThreeOrNot = true;
-                }
+            else {
+                ThreeOrNot = true;
             }
         }
-
     }
     return ThreeOrNot;
-    //TESTED THANK GOD OMG THAT TOOK SO LONG FUCKING SHIT
 }
 
+/* Ensures that any column does not have three of the same move next to
+each other in succession */
 bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
                                 int size,
                                 int col,
                                 int color) {
     bool ThreeOrNot = true;
-    int redCounter = 0;
-    int blueCounter = 0;
-
+    
+    
     if (size == 2) {
         return true;
     }
-
-    //red
+    
+    // Checking Red
     if (color == RED) {
         int i = col;
-        //iterate through rows in col
+        // Iterate through the rows in a column
         for (int j = 0; j < size - 2; j++) {
             if (ThreeOrNot == true) {
                 if ((board[j][i] == 1) && (board[j + 1][i] == 1) && (board[j + 2][i] == 1)) {
@@ -140,11 +96,11 @@ bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
             }
         }
     }
-
-    //blue
+    
+    // Checking blue
     if (color == BLUE) {
         int i = col;
-        //iterate through columns in row
+        // Iterate through the columns in a row
         for (int j = 0; j < size - 2; j++) {
             if (ThreeOrNot == true) {
                 if ((board[j][i] == 2) && (board[j + 1][i] == 2) && (board[j + 2][i] == 2)) {
@@ -156,10 +112,10 @@ bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
             }
         }
     }
-
+    
     if (color == UNKNOWN) {
         int i = col;
-        //iterate through columns in row
+        // Iterate through the columns in a row
         for (int j = 0; j < size - 2; j++) {
             if (ThreeOrNot == true) {
                 if ((board[j][i] == 0) && (board[j + 1][i] == 0) && (board[j + 2][i] == 0)) {
@@ -172,14 +128,15 @@ bool col_has_no_threes_of_color(const int board[MAX_SIZE][MAX_SIZE],
         }
     }
     return ThreeOrNot;
-    //TESTED
 }
 
+// Ensures that a row or column does not have any three moves consecutively in a line
 bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
-    //if color is red row
+    
+    // If the color is red row
     bool ThreeInRow = true;
     bool ThreeInCol = true;
-
+    
     for (int row = 0; row < size; row++) {
         if (ThreeInRow == true) {
             if ((row_has_no_threes_of_color(board, size, row, RED))) {
@@ -190,7 +147,8 @@ bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
             }
         }
     }
-    //if color is blue row
+    
+    // If the color is blue row
     for (int row = 0; row < size; row++) {
         if (ThreeInRow == true) {
             if ((row_has_no_threes_of_color(board, size, row, BLUE))) {
@@ -201,18 +159,20 @@ bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
             }
         }
     }
-    //if color is RED col
+    
+    // If the color is RED column
     for (int col = 0; col < size; col++) {
-            if (ThreeInCol == true) {
-                if ((col_has_no_threes_of_color(board, size, col, RED))) {
-                    ThreeInCol = true;
-                }
-                else {
-                    ThreeInCol = false;
-                }
+        if (ThreeInCol == true) {
+            if ((col_has_no_threes_of_color(board, size, col, RED))) {
+                ThreeInCol = true;
+            }
+            else {
+                ThreeInCol = false;
             }
         }
-    //if color is BLUE col
+    }
+    
+    // If the color is BLUE column
     for (int col = 0; col < size; col++) {
         if (ThreeInCol == true) {
             if ((col_has_no_threes_of_color(board, size, col, BLUE))) {
@@ -223,29 +183,31 @@ bool board_has_no_threes(const int board[MAX_SIZE][MAX_SIZE], int size) {
             }
         }
     }
+    
     if (ThreeInCol == true && ThreeInRow == true) {
         return true;
     }
     else {
         return false;
     }
-    //TESTED
 }
 
+// Used in order to make sure that the two rows are not exactly the same if they are complete
 bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
                         int size,
                         int row1,
                         int row2) {
+    
     bool isRowDiff = true;
     int rowCounter = 0;
     int col = 0;
-
+    
     for (col = 0; col < size; col++) {
         if (board[row1][col] == 0 || board[row2][col] == 0) {
             return true;
         }
     }
-
+    
     for (col = 0; col < size; col++) {
         if (board[row1][col] == board[row2][col]) {
             rowCounter += 1;
@@ -258,52 +220,43 @@ bool rows_are_different(const int board[MAX_SIZE][MAX_SIZE],
     else {
         isRowDiff = true;
     }
-
-
-
     return isRowDiff;
-    //TESTED
 }
 
-bool cols_are_different(const int board[MAX_SIZE][MAX_SIZE],
-                        int size,
-                        int col1,
-                        int col2) {
+// Verifies that no two columns given are exactly the same if they are complete
+bool cols_are_different(const int board[MAX_SIZE][MAX_SIZE], int size, int col1, int col2) {
     bool isColDiff = true;
     int colCounter = 0;
     int row = 0;
-
+    
     for (row = 0; row < size; row++) {
         if (board[row][col1] == 0 || board[row][col2] == 0) {
             return true;
         }
     }
-
+    
     for (row = 0; row < size; row++) {
         if (board[row][col1] == board[row][col2]) {
             colCounter += 1;
         }
     }
-
+    
     if (colCounter == size) {
         isColDiff = false;
     }
     else {
         isColDiff = true;
     }
-
-
-
     return isColDiff;
-    //TESTED
 }
 
+// Makes sure that no two rows or columns are the same if they are complete
 bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
     bool NoColDups = true;
     bool NoRowDups = true;
-
-
-    //rows
+    
+    
+    // In order to verify rows
     for (int row1 = 0; row1 < size; row1++) {
         for (int row2 = row1 + 1; row2 < size; row2++) {
             if (NoRowDups == true) {
@@ -317,7 +270,7 @@ bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
         }
     }
     
-    //cols
+    // In order to verify columns
     for (int col1 = 0; col1 < size; col1++) {
         for (int col2 = col1 + 1; col2 < size; col2++) {
             if (NoColDups == true) {
@@ -330,18 +283,14 @@ bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
             }
         }
     }
-
+    
     if (NoColDups == true && NoRowDups == true) {
         return true;
     }
     else {
         return false;
     }
-    //TESTED (mostly) yeah fuck you nate it was mostly tested 
-
-
 }
-
 
 /**
  * --------------------------------------------------------
@@ -349,326 +298,241 @@ bool board_has_no_duplicates(const int board[MAX_SIZE][MAX_SIZE], int size) {
  * --------------------------------------------------------
  */
 
+// Ensures that when there are two of one move in a row, the input does not violate the rules of the game
 void solve_three_in_a_row(int board[MAX_SIZE][MAX_SIZE],
+                          int size,
+                          int row,
+                          bool announce) {
+    
+    if (size == 2) {
+        return;
+    }
+    for(int col = 0; col < size - 2; col++) {
+        // case 1: -XX becomes OXX for a row
+        if(board[row][col] == UNKNOWN && board[row][col + 1] != UNKNOWN && board[row][col + 2] == board[row][col + 1]) {
+            int op_color = opposite_color(board[row][col + 1]);
+                mark_square_as(board, size, row, col, op_color, announce);
+        }
+                           
+        // case 2: xx- becomes xxo for a row
+        if(board[row][col] != UNKNOWN && board[row][col + 1] == board[row][col] && board[row][col + 2] == UNKNOWN) {
+            int op_color = opposite_color(board[row][col]);
+                mark_square_as(board, size, row, col + 2, op_color, announce);
+        }
+        
+        // case 3: x-x become xox for a row
+        if(board[row][col] != UNKNOWN && board[row][col + 2] == board[row][col] && board[row][col + 1] == UNKNOWN) {
+            int op_color = opposite_color(board[row][col]);
+                mark_square_as(board, size, row, col + 1, op_color, announce);
+        }
+    }
+}
+                                                                                                   
+// Ensures that when there are two of one move in a column, the input does not violate the rules of the game
+void solve_three_in_a_column(int board[MAX_SIZE][MAX_SIZE], int size, int col, bool announce){
+    
+    if (size == 2) {
+            return;
+        }
+    
+    for(int row = 0; row < size - 2; row++) {
+        // case 1: -XX becomes OXX for a column
+        if(board[row][col] == UNKNOWN && board[row + 1][col] != UNKNOWN && board[row + 2][col] == board[row + 1][col]) {
+            int op_color = opposite_color(board[row][col + 1]);
+            mark_square_as(board, size, row, col, op_color, announce);
+        }
+        
+        // case 2: XX- becomes XXO for a column
+        if(board[row][col] != UNKNOWN && board[row + 1][col] == board[row][col] && board[row + 2][col] == UNKNOWN) {
+            int op_color = opposite_color(board[row][col]);
+            mark_square_as(board, size, row + 2, col, op_color, announce);
+        }
+        
+        // case 3: X_X become XOX for a column
+        if(board[row][col] != UNKNOWN && board[row + 2][col] == board[row][col] && board[row + 1][col] == UNKNOWN) {
+            int op_color = opposite_color(board[row][col]);
+            mark_square_as(board, size, row + 1, col, op_color, announce);
+        }
+    }
+}
+
+                                                                                                   
+// Checks rows to make sure that the number of blue and red colors are equal and balanced
+void solve_balance_row(int board[MAX_SIZE][MAX_SIZE], int size, int row, bool announce) {
+    
+    int col = 0;
+      int redHalfCounter = 0;
+      int blueHalfCounter = 0;
+    
+    // If half row is RED
+    for (col = 0; col < size; col++) {
+        if (board[row][col] == RED) {
+            redHalfCounter += 1;
+        }
+    }
+    
+    if (redHalfCounter == (size / 2)) {
+             for (col = 0; col < size; col++) {
+                  if (board[row][col] == UNKNOWN) {
+                        mark_square_as(board, size, row, col, BLUE, announce);
+                  }
+            }
+    }
+                                                                                                   
+   // If half row is BLUE
+   for (col = 0; col < size; col++) {
+       if (board[row][col] == BLUE) {
+            blueHalfCounter += 1;
+       }
+   }
+
+    if (blueHalfCounter == (size / 2)) {
+     for (col = 0; col < size; col++) {
+        if (board[row][col] == UNKNOWN) {
+            mark_square_as(board, size, row, col, RED, announce);
+        }
+     }
+     return;
+    }
+}
+                                                                                                   
+
+    // Checks to make sure that half the column is balanced with red and blue moves
+
+    void solve_balance_column(int board[MAX_SIZE][MAX_SIZE], int size, int col, bool announce) {
+      int row = 0;
+      int redHalfCounter = 0;
+      int blueHalfCounter = 0;
+                                                                                                   
+      // If half row is RED
+      for (row = 0; row < size; row++) {
+          if (board[row][col] == RED) {
+              redHalfCounter += 1;
+          }
+      }
+        
+      if (redHalfCounter == (size / 2)) {
+            for (row = 0; row < size; row++) {
+                if (board[row][col] == UNKNOWN) {
+                      mark_square_as(board, size, row, col, BLUE, announce);
+                }
+            }
+      }
+   
+    // If half col is BLUE
+         for (row = 0; row < size; row++) {
+             if (board[row][col] == BLUE) {
+                 blueHalfCounter += 1;
+             }
+          }
+            if (blueHalfCounter == (size / 2)) {
+                    for (row = 0; row < size; row++) {
+                            if (board[row][col] == UNKNOWN) {
+                                  mark_square_as(board, size, row, col, RED, announce);
+                            }
+                     }
+            }
+            return;
+}
+                                                                                                   
+                                                                                                   
+/**
+* --------------------------------------------------------
+* ---------- GAMEPLAY FUNCTIONS --------------------------
+* --------------------------------------------------------
+*/
+                                                                                                   
+
+    // Checks if board is solved or not, returns true is board is solved
+    bool board_is_solved(const int board[MAX_SIZE][MAX_SIZE], int size) {
+        
+      if ((board_is_valid(board, size)) && (count_unknown_squares(board, size) == 0)) {
+          return true;
+      }
+      else {
+          return false;
+      }
+}
+                                                                                                   
+    // Checks user input to confirm that it is valid and matches with the row, column and color
+    bool check_valid_input(int size, int row_input, char col_input, char color_char, int &row, int &col) {
+            
+            if (row_input > size || row_input < 1) {
+               cout << "Sorry, that's not a valid input.";
+               return false;
+            }
+            else if ((col_input < 'A' || col_input >('A' + size - 1)) &&
+            ((col_input < 'a' || col_input >('a' + size - 1)))) {
+                 cout << "Sorry, that's not a valid input.";
+                 return false;
+            }
+            else if (color_char != RED_LETTER && color_char != 'x' && color_char != BLUE_LETTER && color_char != 'o' && color_char != '-') {
+                cout << "Sorry, that's not a valid input.";
+                return false;
+            }
+            else {
+                row = row_input - 1;
+                    if (isupper(col_input)) {
+                    col = col_input - 65;
+                }
+                else {
+                        col = col_input - 97;
+                }
+                return true;
+                }
+    }
+                                                                                                   
+// Takes the row and column and makes sure that the move is valid
+bool check_valid_move(const int original_board[MAX_SIZE][MAX_SIZE], const int current_board[MAX_SIZE][MAX_SIZE],
+        int size,int row, int col, int color) {
+    
+        if (original_board[row][col] != 0) {
+            cout << "Sorry, original squares cannot be changed.";
+            return false;
+        }
+        else {
+            int checkCurrentBoard[MAX_SIZE][MAX_SIZE];
+                for (int i = 0; i < size; i++) {
+                    for (int j = 0; j < size; j++) {
+                        checkCurrentBoard[i][j] = current_board[i][j];
+                    }
+                }
+            
+            mark_square_as(checkCurrentBoard, size, row, col, color, false);
+                if (board_is_valid(checkCurrentBoard, size) == false) {
+                    cout << "Sorry, that move violates a rule.";
+                    return false;
+                }
+                else {
+                    return true;
+                }
+        }
+}
+                                                                                                   
+                                                                                                   
+                                                                                                   
+/**
+* --------------------------------------------------------
+* ---------------- S'MORES FUNCTIONS    ------------------
+* ---------- DO NOT DELETE THESE FUNCTIONS ---------------
+* ------------- FOR THE REGULAR PROJECT ------------------
+* --------------------------------------------------------
+*/
+                                                                                                   
+void solve_lookahead_row(int board[MAX_SIZE][MAX_SIZE],
     int size,
     int row,
     bool announce) {
-    int col = 0;
-
-    if (size == 2) {
-        return;
-    }
-    //two in row
-    for (col = 0; col < size /* - 2? */; col++) {
-        if ((board[row][col] == RED) && board[row][col + 1] == RED) {
-            if (col == 0) {
-                mark_square_as(board, size, row, col + 2, BLUE, announce);
-
-            }
-            else if (col == size - 1) {
-                mark_square_as(board, size, row, col - 2, BLUE, announce);
-            }
-
-            else if (col == size - 2) {
-                mark_square_as(board, size, row, col - 1, BLUE, announce);
-            }
-            else {
-                mark_square_as(board, size, row, col + 2, BLUE, announce);
-                mark_square_as(board, size, row, col - 1, BLUE, announce);
-            }
-
-        }
-
-        else if ((board[row][col] == BLUE) && board[row][col + 1] == BLUE) {
-            if (col == 0) {
-                mark_square_as(board, size, row, col + 2, RED, announce);
-
-            }
-            else if (col == size - 1) {
-                mark_square_as(board, size, row, col - 2, RED, announce);
-            }
-            else if (col == size - 2) {
-                mark_square_as(board, size, row, col - 1, RED, announce);
-            }
-            else {
-                mark_square_as(board, size, row, col + 2, RED, announce);
-                mark_square_as(board, size, row, col - 1, RED, announce);
-            }
-
-
-        }
-
-        //two separate red
-        else if ((board[row][col] == BLUE) && board[row][col + 2] == BLUE) {
-            mark_square_as(board, size, row, col + 1, RED, announce);
-
-        }
-
-        //two separate blue
-        else if ((board[row][col] == RED) && board[row][col + 2] == RED) {
-            mark_square_as(board, size, row, col + 1, BLUE, announce);
-
-        }
-
-
-
-    }
-}
-
-void solve_three_in_a_column(int board[MAX_SIZE][MAX_SIZE],
-                             int size,
-                             int col,
-                             bool announce) {
-    int row = 0;
-
-    if (size == 2) {
-        return;
-    }
-    //two in row
-    for (row = 0; row < size /* - 2? */; row++) {
-        if ((board[row][col] == RED) && board[row + 1][col] == RED) {
-            if (row == 0) {
-                mark_square_as(board, size, row + 2, col, BLUE, announce);
-
-            }
-            else if (row == size - 1) {
-                mark_square_as(board, size, row - 2, col, BLUE, announce);
-            }
-
-            else if (row == size - 2) {
-                mark_square_as(board, size, row - 1, col, BLUE, announce);
-            }
-            else {
-                mark_square_as(board, size, row + 2, col, BLUE, announce);
-                mark_square_as(board, size, row - 1, col, BLUE, announce);
-            }
-
-        }
-
-        else if ((board[row][col] == BLUE) && board[row + 1][col] == BLUE) {
-            if (row == 0) {
-                mark_square_as(board, size, row + 2, col, RED, announce);
-
-            }
-            else if (row == size - 1) {
-                mark_square_as(board, size, row - 2, col, RED, announce);
-            }
-            else if (row == size - 2) {
-                mark_square_as(board, size, row - 1, col, RED, announce);
-            }
-            else {
-                mark_square_as(board, size, row + 2, col, RED, announce);
-                mark_square_as(board, size, row - 1, col, RED, announce);
-            }
-
-
-        }
-
-        //two separate red
-        else if ((board[row][col] == BLUE) && board[row + 2][col] == BLUE) {
-            mark_square_as(board, size, row + 1, col, RED, announce);
-
-        }
-
-        //two separate blue
-        else if ((board[row][col] == RED) && board[row + 2][col] == RED) {
-            mark_square_as(board, size, row + 1, col, BLUE, announce);
-
-        }
-
-
-
-    }
-    //TESTED
     
-
-    return;
-}
-
-
-void solve_balance_row(int board[MAX_SIZE][MAX_SIZE],
-                       int size,
-                       int row,
-                       bool announce) {
-    int col = 0;
-    int redHalfCounter = 0;
-    int blueHalfCounter = 0;
-    
-    //if half row is RED
-    for (col = 0; col < size; col++) {
-        if (board[row][col] == RED) {
-            redHalfCounter += 1;
-        }
-    }
-    if (redHalfCounter == (size / 2)) {
-        for (col = 0; col < size; col++) {
-            if (board[row][col] != RED) {
-                mark_square_as(board, size, row, col, BLUE, announce);
-            }
-        }
-    }
-
-    //if half row is BLUE
-    for (col = 0; col < size; col++) {
-        if (board[row][col] == BLUE) {
-            blueHalfCounter += 1;
-        }
-    }
-    if (blueHalfCounter == (size / 2)) {
-        for (col = 0; col < size; col++) {
-            if (board[row][col] != BLUE) {
-                mark_square_as(board, size, row, col, RED, announce);
-            }
-        }
-    }
-    
-
-    return;
-}
-
-void solve_balance_column(int board[MAX_SIZE][MAX_SIZE],
-                          int size,
-                          int col,
-                          bool announce) {
-    int row = 0;
-    int redHalfCounter = 0;
-    int blueHalfCounter = 0;
-
-    //if half row is RED
-    for (row = 0; row < size; row++) {
-        if (board[row][col] == RED) {
-            redHalfCounter += 1;
-        }
-    }
-    if (redHalfCounter == (size / 2)) {
-        for (row = 0; row < size; row++) {
-            if (board[row][col] != RED) {
-                mark_square_as(board, size, row, col, BLUE, announce);
-            }
-        }
-    }
-
-    //if half col is BLUE
-    for (row = 0; row < size; row++) {
-        if (board[row][col] == BLUE) {
-            blueHalfCounter += 1;
-        }
-    }
-    if (blueHalfCounter == (size / 2)) {
-        for (row = 0; row < size; row++) {
-            if (board[row][col] != BLUE) {
-                mark_square_as(board, size, row, col, RED, announce);
-            }
-        }
-    }
-
-    
-    return;
-    //TESTED
-}
-
-
-/**
- * --------------------------------------------------------
- * ---------- GAMEPLAY FUNCTIONS --------------------------
- * --------------------------------------------------------
- */
-
-bool board_is_solved(const int board[MAX_SIZE][MAX_SIZE], int size) {
-    
-    if ((board_has_no_duplicates(board, size) == true) && (board_has_no_threes(board, size) 
-        == true) && (count_unknown_squares(board, size) == 0)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-    
-}
-
-bool check_valid_input(int size, int row_input, char col_input,
-    char color_char, int &row, int &col) {
-    if (row_input > size || row_input < 1) {
-
-        cout << "Sorry, that's not a valid input.";
-        return false;
-    }
-
-    else if ((col_input < 'A' || col_input >('A' + size - 1)) &&
-        ((col_input < 'a' || col_input >('a' + size - 1)))) {
-
-        cout << "Sorry, that's not a valid input.";
-        return false;
-    }
-
-    else if (color_char != RED_LETTER && color_char != 'x'
-        && color_char != BLUE_LETTER && color_char != 'o' &&
-        color_char != '-') {
-
-        cout << "Sorry, that's not a valid input.";
-        return false;
-    }
-    else {
-        row = row_input - 1;
-        if (isupper(col_input)) {
-            col = col_input - 65;
-        }
-        else {
-            col = col_input - 97;
-        }
-        return true;
-
-    }
-}
-
-bool check_valid_move(const int original_board[MAX_SIZE][MAX_SIZE],
-                      const int current_board[MAX_SIZE][MAX_SIZE],
-                      int size, int row, int col, int color) {
-    
-    if (original_board[row][col] != 0) {
-        cout << "Sorry, original squares cannot be changed.";
-        return false;
-    }
-    else if (board_has_no_threes
-    (current_board, size) == false || board_has_no_duplicates(current_board, size)
-    == false){
-        cout << "Sorry, that move violates a rule.";
-        return false;
-    }
-    else {
-        return true;
-    
-
-    }
-
-
-
-
-
-}
-
-
-/**
- * --------------------------------------------------------
- * ---------------- S'MORES FUNCTIONS    ------------------
- * ---------- DO NOT DELETE THESE FUNCTIONS ---------------
- * ------------- FOR THE REGULAR PROJECT ------------------
- * --------------------------------------------------------
- */
-
-void solve_lookahead_row(int board[MAX_SIZE][MAX_SIZE],
-                         int size,
-                         int row,
-                         bool announce) {
     // write your code here
-
     return;
-}
-
+    }
+                                                                                                   
 void solve_lookahead_column(int board[MAX_SIZE][MAX_SIZE],
-                            int size,
-                            int col,
-                            bool announce) {
+    int size,
+    int col,
+    bool announce) {
+    
     // write your code here
     return;
-}
+    }
