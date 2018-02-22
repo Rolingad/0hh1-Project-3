@@ -305,31 +305,45 @@ void solve_three_in_a_row(int board[MAX_SIZE][MAX_SIZE],
     int size,
     int row,
     bool announce) {
-    int col = 0;
 
     if (size == 2) {
         return;
     }
+    for(int col = 0; col < size - 2; col++) {
+        // case 1: -xx becomes oxx
+        if(board[row][col] == UNKNOWN && board[row][col + 1] != UNKNOWN && board[row][col + 2] == board[row][col + 1]) { 
+            mark_square_as(board, size, row, col, opposite_color[board[row][col +1], announce);
+        }
+        // case 2: xx- becomes xxo
+        if(board[row][col] != UNKNOWN && board[row][col + 1] == board[row][col] && board[row][col + 2] == UNKNOWN) {
+            mark_square_as(board, size, row, col + 2, opposite_color[board[row][col], announce);   
+        }
+        // case 3: x-x become xox
+        if(board[row][col] != UNKNOWN && board[row][col + 2] == board[row][col] && board[row][col + 1] == UNKNOWN) {
+            mark_square_as(board, size, row, col + 1, opposite_color[board[row][col], announce);   
+        }                                                            
+    }
+                                                                 
+                                                                 
+    
     // Checking two in a row 
-    for (col = 0; col < size /* - 2? */; col++) {
-        for (col = 0; col < size /* - 2? */; col++) {
-            if ((board[row][col] == RED) && board[row][col + 1] == RED) {
-                if (col == 0 && (col + 2 == UNKNOWN)) { //add marking spot must be equal to unknown
+    /* for (col = 0; col < size - 2; col++) {
+        if ((board[row][col] == RED) && board[row][col + 1] == RED) {
+            if (col == 0 && (col + 2 == UNKNOWN)) { //add marking spot must be equal to unknown
+                mark_square_as(board, size, row, col + 2, BLUE, announce);
+
+            }
+            else if (col == size - 1 && (col - 2 == UNKNOWN)) {
+                mark_square_as(board, size, row, col - 2, BLUE, announce);
+            }
+
+            else if (col == size - 2 && (col - 1 == UNKNOWN)) {
+                mark_square_as(board, size, row, col - 1, BLUE, announce);
+            }
+            else {
+                if (col + 2 == UNKNOWN && col - 1 == UNKNOWN) {
                     mark_square_as(board, size, row, col + 2, BLUE, announce);
-
-                }
-                else if (col == size - 1 && (col - 2 == UNKNOWN)) {
-                    mark_square_as(board, size, row, col - 2, BLUE, announce);
-                }
-
-                else if (col == size - 2 && (col - 1 == UNKNOWN)) {
                     mark_square_as(board, size, row, col - 1, BLUE, announce);
-                }
-                else {
-                    if (col + 2 == UNKNOWN && col - 1 == UNKNOWN) {
-                        mark_square_as(board, size, row, col + 2, BLUE, announce);
-                        mark_square_as(board, size, row, col - 1, BLUE, announce);
-                    }
                 }
 
             }
@@ -371,7 +385,7 @@ void solve_three_in_a_row(int board[MAX_SIZE][MAX_SIZE],
 
 
         }
-    }
+    }*/
 }
 
 // Ensures that when there are two of one move in a column, the input does not violate the rules of the game
